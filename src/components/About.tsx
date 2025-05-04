@@ -1,0 +1,65 @@
+
+import { Button } from "@/components/ui/button";
+
+const About = () => {
+  return (
+    <section id="about" className="py-16 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="lg:w-1/2">
+            <img
+              src="https://images.unsplash.com/photo-1581078426770-6d336e5de7bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80"
+              alt="Our expert team"
+              className="rounded-lg shadow-lg w-full object-cover"
+            />
+          </div>
+          <div className="lg:w-1/2">
+            <h2 className="text-3xl md:text-4xl font-bold text-africa-brown mb-6">
+              About AfriSocks Global
+            </h2>
+            <p className="text-lg text-gray-700 mb-6">
+              With over 15 years of experience in the global sock manufacturing industry, we've established ourselves as a trusted partner for businesses across Africa and beyond.
+            </p>
+            <p className="text-lg text-gray-700 mb-6">
+              Our mission is to empower African entrepreneurs and businesses to build successful sock manufacturing operations, creating jobs and fostering economic growth throughout the continent.
+            </p>
+            <div className="space-y-4 mb-8">
+              <div className="flex items-start">
+                <div className="h-12 w-12 rounded-full bg-africa-beige flex items-center justify-center mr-4 flex-shrink-0">
+                  <span className="font-bold text-africa-orange">1</span>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold mb-1">Expert Consultation</h4>
+                  <p className="text-gray-600">Personalized guidance from industry specialists familiar with African markets.</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="h-12 w-12 rounded-full bg-africa-beige flex items-center justify-center mr-4 flex-shrink-0">
+                  <span className="font-bold text-africa-orange">2</span>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold mb-1">Comprehensive Support</h4>
+                  <p className="text-gray-600">End-to-end solutions from factory setup to product distribution.</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="h-12 w-12 rounded-full bg-africa-beige flex items-center justify-center mr-4 flex-shrink-0">
+                  <span className="font-bold text-africa-orange">3</span>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold mb-1">Long-term Partnership</h4>
+                  <p className="text-gray-600">Ongoing technical assistance, market insights, and growth strategies.</p>
+                </div>
+              </div>
+            </div>
+            <Button asChild className="bg-africa-orange hover:bg-africa-terracotta text-white px-8 py-6 text-lg">
+              <a href="#contact">Partner With Us</a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default About;
