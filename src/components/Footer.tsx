@@ -1,9 +1,6 @@
-
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
-
 const Footer = () => {
-  return (
-    <footer className="bg-gray-900 text-white pt-16 pb-8">
+  return <footer className="bg-gray-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
@@ -14,20 +11,7 @@ const Footer = () => {
             <p className="mb-6">
               Your trusted partner for sock manufacturing solutions across Africa and beyond.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-africa-orange">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-africa-orange">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-africa-orange">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-africa-orange">
-                <Linkedin size={20} />
-              </a>
-            </div>
+            
           </div>
           
           <div>
@@ -68,8 +52,6 @@ const Footer = () => {
           <p>© {new Date().getFullYear()} AfriSocks Global. All rights reserved.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
