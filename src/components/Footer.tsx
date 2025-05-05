@@ -1,4 +1,7 @@
+
 import { Facebook, Instagram, Linkedin, Twitter, MessageCircle } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+
 const Footer = () => {
   return <footer className="bg-gray-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
@@ -15,6 +18,10 @@ const Footer = () => {
               <a href="https://wa.me/8618356666977" target="_blank" rel="noopener noreferrer" className="bg-green-600 hover:bg-green-700 p-2 rounded-full transition-colors">
                 <MessageCircle className="h-5 w-5" />
                 <span className="sr-only">WhatsApp</span>
+              </a>
+              <a href="https://www.linkedin.com/in/jing-pan" target="_blank" rel="noopener noreferrer" className="bg-blue-600 hover:bg-blue-700 p-2 rounded-full transition-colors">
+                <Linkedin className="h-5 w-5" />
+                <span className="sr-only">LinkedIn</span>
               </a>
             </div>
           </div>
@@ -42,13 +49,25 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-lg font-semibold mb-6">African Regions</h4>
+            <h4 className="text-lg font-semibold mb-6">Contact Information</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-africa-orange">West Africa</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-africa-orange">East Africa</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-africa-orange">Southern Africa</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-africa-orange">North Africa</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-africa-orange">Central Africa</a></li>
+              <li className="flex items-center text-gray-400">
+                <a href="https://wa.me/8618356666977" target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-green-400">
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  +86 18356666977 (China)
+                </a>
+              </li>
+              <li className="flex items-center text-gray-400">
+                <a href="https://www.linkedin.com/in/jing-pan" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400">
+                  <div className="flex items-center space-x-2">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src="lovable-uploads/36815fa1-0c9b-4cca-a2ee-92b9675e83b4.png" alt="Jing Pan" />
+                      <AvatarFallback>JP</AvatarFallback>
+                    </Avatar>
+                    <span>Jing Pan - Connect on LinkedIn</span>
+                  </div>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
