@@ -1,64 +1,86 @@
-import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import LanguageSwitcher from "./LanguageSwitcher";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-  return <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex justify-between items-center">
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const menuItems = [
+    { href: "#services", label: "Services" },
+    { href: "#benefits", label: "Benefits" },
+    { href: "#about", label: "About" },
+    { href: "#testimonials", label: "Testimonials" },
+  ];
+
+  return (
+    <header className="fixed w-full bg-white z-50 shadow-sm">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center py-4">
+          {/* Logo */}
           <a href="/" className="flex items-center">
-            <span className="text-2xl font-bold text-africa-orange">
-              AfriSocks<span className="text-africa-brown">Global</span>
-            </span>
+            <span className="text-2xl font-bold text-africa-orange">AfriSocks</span>
+            <span className="text-sm ml-1 text-africa-brown">Global</span>
           </a>
-          
-          <div className="hidden md:flex space-x-8 items-center">
-            <a href="#services" className="font-medium text-gray-700 hover:text-africa-orange transition-colors">
-              Services
-            </a>
-            <a href="#benefits" className="font-medium text-gray-700 hover:text-africa-orange transition-colors">
-              Benefits
-            </a>
-            <a href="#about" className="font-medium text-gray-700 hover:text-africa-orange transition-colors">
-              About Us
-            </a>
-            
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
+            {menuItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-gray-700 hover:text-africa-orange font-medium transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
+            <LanguageSwitcher />
             <Button asChild className="bg-africa-orange hover:bg-africa-terracotta text-white">
               <a href="#contact">Contact Us</a>
             </Button>
-          </div>
-          
-          <div className="md:hidden">
-            <Button variant="ghost" size="icon" onClick={toggleMenu}>
-              {isMenuOpen ? <X /> : <Menu />}
-            </Button>
+          </nav>
+
+          {/* Mobile menu button */}
+          <div className="flex items-center space-x-4 md:hidden">
+            <LanguageSwitcher />
+            <button 
+              onClick={toggleMenu}
+              className="text-gray-700 hover:text-africa-orange"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
       </div>
-      
-      {/* Mobile Menu */}
-      {isMenuOpen && <div className="md:hidden bg-white py-4 px-4 shadow-md animate-fade-in">
-          <div className="flex flex-col space-y-4">
-            <a href="#services" className="font-medium text-gray-700 hover:text-africa-orange transition-colors" onClick={toggleMenu}>
-              Services
-            </a>
-            <a href="#benefits" className="font-medium text-gray-700 hover:text-africa-orange transition-colors" onClick={toggleMenu}>
-              Benefits
-            </a>
-            <a href="#about" className="font-medium text-gray-700 hover:text-africa-orange transition-colors" onClick={toggleMenu}>
-              About Us
-            </a>
-            <a href="#testimonials" className="font-medium text-gray-700 hover:text-africa-orange transition-colors" onClick={toggleMenu}>
-              Testimonials
-            </a>
-            <Button asChild className="w-full bg-africa-orange hover:bg-africa-terracotta text-white">
-              <a href="#contact" onClick={toggleMenu}>Contact Us</a>
-            </Button>
+
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-white border-t py-4">
+          <div className="container mx-auto px-4">
+            <nav className="flex flex-col space-y-4">
+              {menuItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-gray-700 hover:text-africa-orange font-medium py-2 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
+              <Button asChild className="bg-africa-orange hover:bg-africa-terracotta text-white w-full">
+                <a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact Us</a>
+              </Button>
+            </nav>
           </div>
-        </div>}
-    </nav>;
+        </div>
+      )}
+    </header>
+  );
 };
+
 export default Navbar;
