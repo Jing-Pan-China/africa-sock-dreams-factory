@@ -97,8 +97,8 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold mb-1">Our Offices</h4>
                     <p>Xiamen, China</p>
-                    <p>Lagos, Nigeria</p>
-                    <p>Nairobi, Kenya</p>
+                    <p>Zhuji, China </p>
+                    <p>Shenzhen/ Dongguan,China</p>
                   </div>
                 </div>
               </div>
