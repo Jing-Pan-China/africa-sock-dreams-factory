@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocation } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Index = () => {
   const { language, setLanguage } = useLanguage();
@@ -34,9 +34,9 @@ const Index = () => {
         <meta name="description" content="Your one-stop global partner for sock factory solutions in Africa" />
         
         {/* Hreflang tags for language alternatives */}
-        <link rel="alternate" hreflang="en" href="https://africasock.com/en" />
-        <link rel="alternate" hreflang="sw" href="https://africasock.com/sw" />
-        <link rel="alternate" hreflang="fr" href="https://africasock.com/fr" />
+        <link rel="alternate" hrefLang="en" href="https://africasock.com/en" />
+        <link rel="alternate" hrefLang="sw" href="https://africasock.com/sw" />
+        <link rel="alternate" hrefLang="fr" href="https://africasock.com/fr" />
         <link rel="canonical" href={`https://africasock.com${location.pathname}`} />
       </Helmet>
       

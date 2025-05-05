@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -29,23 +30,25 @@ const PageTracker = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <LanguageProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <PageTracker />
-          <Routes>
-            {/* Language-specific routes */}
-            <Route path="/en" element={<Index />} />
-            <Route path="/sw" element={<Index />} />
-            <Route path="/fr" element={<Index />} />
-            {/* Redirect root to default language (English) */}
-            <Route path="/" element={<Navigate to="/en" replace />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <HelmetProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <PageTracker />
+            <Routes>
+              {/* Language-specific routes */}
+              <Route path="/en" element={<Index />} />
+              <Route path="/sw" element={<Index />} />
+              <Route path="/fr" element={<Index />} />
+              {/* Redirect root to default language (English) */}
+              <Route path="/" element={<Navigate to="/en" replace />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </HelmetProvider>
     </LanguageProvider>
   </QueryClientProvider>
 );
