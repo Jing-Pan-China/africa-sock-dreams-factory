@@ -19,8 +19,8 @@ const Index = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const langParam = params.get('lang');
-    if (langParam && ['en', 'zh', 'fr', 'es'].includes(langParam)) {
-      setLanguage(langParam as 'en' | 'zh' | 'fr' | 'es');
+    if (langParam && ['en', 'sw', 'fr'].includes(langParam)) {
+      setLanguage(langParam as 'en' | 'sw' | 'fr');
     }
   }, [location.search, setLanguage]);
 

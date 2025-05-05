@@ -1,8 +1,7 @@
-
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 // Define our available languages
-export type Language = 'en' | 'zh' | 'fr' | 'es';
+export type Language = 'en' | 'sw' | 'fr';
 
 // Define the context type
 type LanguageContextType = {
@@ -85,68 +84,68 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.form.submit": "Submit Inquiry",
     "contact.form.sending": "Sending..."
   },
-  zh: {
+  sw: {
     // Hero section
-    "hero.title": "构建非洲袜子制造业的未来",
-    "hero.subtitle": "您的一站式全球袜厂解决方案合作伙伴 - 从机械和纱线到出口服务和高质量、经济实惠的袜子产品。",
-    "hero.cta.factory": "建立您的工厂",
-    "hero.cta.services": "探索服务",
-    "hero.stats.experience": "年经验",
-    "hero.stats.countries": "非洲国家",
-    "hero.stats.factories": "已建工厂",
-    "hero.stats.satisfaction": "客户满意度",
+    "hero.title": "Kujenga Mustakabali wa Kiwanda cha Soksi Afrika",
+    "hero.subtitle": "Mshirika wako wa kimataifa wa suluhisho la kiwanda cha soksi - kutoka mashine na nyuzi hadi huduma za usafirishaji na bidhaa za soksi zenye ubora na gharama nafuu.",
+    "hero.cta.factory": "Anza Kiwanda Chako",
+    "hero.cta.services": "Chunguza Huduma",
+    "hero.stats.experience": "Miaka ya Uzoefu",
+    "hero.stats.countries": "Nchi za Afrika",
+    "hero.stats.factories": "Viwanda Vilivyojengwa",
+    "hero.stats.satisfaction": "Kuridhika kwa Wateja",
     
     // Services section
-    "services.title": "我们的全面袜子解决方案",
-    "services.subtitle": "从建立自己的工厂到供应成品，我们提供您在袜子行业取得成功所需的所有服务。",
-    "services.machines.title": "袜机",
-    "services.machines.description": "适用于各种生产规模的最先进袜子编织机械。我们提供安装、培训和维护服务。",
-    "services.yarns.title": "优质纱线",
-    "services.yarns.description": "全球采购的优质纱线 - 棉、羊毛、合成纤维混纺和特种纤维，价格具有竞争力。",
-    "services.export.title": "出口服务",
-    "services.export.description": "全面的出口解决方案，包括文件、物流、海关清关和市场准入策略。",
-    "services.socks.title": "成品袜",
-    "services.socks.description": "各种款式、尺寸和材料的高质量、经济实惠的袜子产品，随时满足您的市场需求。",
+    "services.title": "Suluhisho Letu Kamili la Soksi",
+    "services.subtitle": "Kutoka kuanzisha kiwanda chako hadi kupata bidhaa zilizokamilika, tunatoa huduma zote unazohitaji kufanikiwa katika sekta ya soksi.",
+    "services.machines.title": "Mashine za Soksi",
+    "services.machines.description": "Mashine za kisasa za kusuka soksi kwa ajili ya uzalishaji wa viwango vyote. Tunatoa huduma za ufungaji, mafunzo na matengenezo.",
+    "services.yarns.title": "Nyuzi Bora",
+    "services.yarns.description": "Nyuzi bora zinazotoka duniani kote - pamba, sufu, mchanganyiko wa nyuzi bandia, na nyuzi maalumu kwa bei nafuu.",
+    "services.export.title": "Huduma za Usafirishaji",
+    "services.export.description": "Suluhisho kamili za usafirishaji ikiwa ni pamoja na hati, usafirishaji, uondoaji wa forodha, na mikakati ya kufikia soko.",
+    "services.socks.title": "Soksi Zilizokamilika",
+    "services.socks.description": "Bidhaa za soksi zenye ubora wa juu na gharama nafuu katika mitindo, ukubwa, na vifaa mbalimbali, tayari kwa soko lako.",
     
     // Benefits section
-    "benefits.title": "为什么选择我们服务非洲市场",
-    "benefits.subtitle": "我们了解非洲袜子制造业的独特挑战和机遇。",
-    "benefits.africaSolutions.title": "非洲特定解决方案",
-    "benefits.economicAdvantages.title": "经济优势",
-    "benefits.customizedSupport.title": "定制支持",
+    "benefits.title": "Kwa Nini Uchague Sisi kwa Masoko ya Afrika",
+    "benefits.subtitle": "Tunaelewa changamoto na fursa za kipekee za sekta ya utengenezaji wa soksi Afrika.",
+    "benefits.africaSolutions.title": "Suluhisho Maalumu za Afrika",
+    "benefits.economicAdvantages.title": "Faida za Kiuchumi",
+    "benefits.customizedSupport.title": "Msaada wa Kibinafsi",
     
     // About section
-    "about.title": "关于非洲袜业全球",
-    "about.description1": "我们提供端到端的袜子行业服务，包括工厂设置。我们的首席执行官Jing Pan来自一个拥有20多年经验的纺织家族，在瑞典学习公共卫生后正在全球扩张。受非洲同学的启发，她旨在通过袜子业务支持非洲当地就业。",
-    "about.description2": "我们的使命是赋能非洲企业家和企业建立成功的袜子制造业务，在整个大陆创造就业机会和促进经济增长。",
-    "about.consultation": "专家咨询",
-    "about.consultation.description": "来自熟悉非洲市场的行业专家的个性化指导。",
-    "about.support": "全面支持",
-    "about.support.description": "从工厂设置到产品分销的端到端解决方案。",
-    "about.partnership": "长期合作",
-    "about.partnership.description": "持续的技术援助、市场洞察和成长策略。",
-    "about.cta": "与我们合作",
+    "about.title": "Kuhusu AfriSocks Global",
+    "about.description1": "Tunatoa huduma kamili za sekta ya soksi, ikiwa ni pamoja na uanzishaji wa kiwanda. CEO wetu, Jing Pan, kutoka familia ya nguo yenye uzoefu wa miaka 20+, anapanuka kimataifa baada ya kusoma afya ya umma nchini Uswidi. Akihamasishwa na wanafunzi wenzake wa Afrika, analenga kuunga mkono ajira za ndani Afrika kupitia biashara ya soksi.",
+    "about.description2": "Dhamira yetu ni kuwapa nguvu wajasiriamali na biashara za Afrika kujenga shughuli za uzalishaji wa soksi zenye mafanikio, kutengeneza kazi na kukuza ukuaji wa uchumi katika bara zima.",
+    "about.consultation": "Ushauri wa Mtaalam",
+    "about.consultation.description": "Mwongozo binafsi kutoka kwa wataalamu wa tasnia wanaozijua masoko za Afrika.",
+    "about.support": "Msaada Kamili",
+    "about.support.description": "Suluhisho kamili kutoka uanzishaji wa kiwanda hadi usambazaji wa bidhaa.",
+    "about.partnership": "Ushirikiano wa Muda Mrefu",
+    "about.partnership.description": "Msaada wa kiufundi unaoendelea, ufahamu wa soko, na mikakati ya ukuaji.",
+    "about.cta": "Shirikiana Nasi",
     
     // Testimonials section
-    "testimonials.title": "客户评价",
+    "testimonials.title": "Wateja Wetu Wanasema Nini",
     
     // Contact section
-    "contact.title": "准备开始您的袜子业务？",
-    "contact.subtitle": "请联系我们进行咨询，了解您的具体需求以及我们如何帮助您在非洲建立或发展袜子制造业务。",
-    "contact.getintouch": "联系我们",
-    "contact.email": "发送电子邮件",
-    "contact.call": "致电我们",
-    "contact.offices": "我们的办公室",
-    "contact.availablefor": "可提供服务",
-    "contact.message": "给我们发消息",
-    "contact.form.name": "您的姓名",
-    "contact.form.email": "电子邮件地址",
-    "contact.form.phone": "电话号码",
-    "contact.form.country": "国家",
-    "contact.form.interest": "我感兴趣的是",
-    "contact.form.message": "您的留言",
-    "contact.form.submit": "提交咨询",
-    "contact.form.sending": "发送中..."
+    "contact.title": "Uko Tayari Kuanza Biashara Yako ya Soksi?",
+    "contact.subtitle": "Wasiliana nasi kwa ushauri kuhusu mahitaji yako mahususi na jinsi tunaweza kukusaidia kuanzisha au kukuza biashara yako ya utengenezaji wa soksi barani Afrika.",
+    "contact.getintouch": "Wasiliana Nasi",
+    "contact.email": "Tuma Barua Pepe",
+    "contact.call": "Tupigie Simu",
+    "contact.offices": "Ofisi Zetu",
+    "contact.availablefor": "Inapatikana Kwa",
+    "contact.message": "Tuma Ujumbe",
+    "contact.form.name": "Jina Lako",
+    "contact.form.email": "Anwani ya Barua Pepe",
+    "contact.form.phone": "Nambari ya Simu",
+    "contact.form.country": "Nchi",
+    "contact.form.interest": "Ninapendezwa Na",
+    "contact.form.message": "Ujumbe Wako",
+    "contact.form.submit": "Wasilisha Hoja",
+    "contact.form.sending": "Inatuma..."
   },
   fr: {
     // Basic translations for French
@@ -156,15 +155,6 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.cta.services": "Explorer les Services",
     // Add more translations as needed
     "contact.form.submit": "Envoyer la Demande"
-  },
-  es: {
-    // Basic translations for Spanish
-    "hero.title": "Construyendo el futuro de la fabricación de calcetines en África",
-    "hero.subtitle": "Su socio global integral para soluciones de fábrica de calcetines - desde maquinaria e hilos hasta servicios de exportación y productos de calcetines de alta calidad y rentables.",
-    "hero.cta.factory": "Inicie Su Fábrica",
-    "hero.cta.services": "Explorar Servicios",
-    // Add more translations as needed
-    "contact.form.submit": "Enviar Consulta"
   }
 };
 
