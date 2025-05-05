@@ -96,7 +96,7 @@ const Contact = () => {
                   <MapPin className="mr-4 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold mb-1">Our Offices</h4>
-                    <p>Johannesburg, South Africa</p>
+                    <p>Xiamen, China</p>
                     <p>Lagos, Nigeria</p>
                     <p>Nairobi, Kenya</p>
                   </div>
