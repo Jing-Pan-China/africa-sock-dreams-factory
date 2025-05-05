@@ -29,11 +29,11 @@ const Hero = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="p-4 bg-white rounded-lg shadow">
             <p className="text-2xl md:text-3xl font-bold text-africa-orange">20+</p>
-            <p className="text-gray-600">Years Experience</p>
+            <p className="text-gray-600">16+</p>
           </div>
           <div className="p-4 bg-white rounded-lg shadow">
             <p className="text-2xl md:text-3xl font-bold text-africa-orange">30+</p>
-            <p className="text-gray-600">African Countries</p>
+            <p className="text-gray-600">99%</p>
           </div>
           <div className="p-4 bg-white rounded-lg shadow">
             <p className="text-2xl md:text-3xl font-bold text-africa-orange">200+</p>
