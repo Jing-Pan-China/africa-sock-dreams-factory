@@ -87,7 +87,7 @@ const Contact = () => {
                   <Phone className="mr-4 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold mb-1">Call Us</h4>
-                    <p>+86-18356666977 (International)</p>
+                    <p>+86-18356666977 (Whatsapp)</p>
                     <p></p>
                   </div>
                 </div>
