@@ -1,5 +1,7 @@
+
 import { Button } from "@/components/ui/button";
 import { Linkedin } from "lucide-react";
+
 const Hero = () => {
   return <div className="relative bg-gradient-to-b from-africa-beige to-white py-16 md:py-24">
       <div className="container mx-auto px-4">
@@ -19,6 +21,13 @@ const Hero = () => {
                 <a href="#services">Explore Services</a>
               </Button>
             </div>
+          </div>
+          <div className="lg:w-1/2 flex justify-center lg:justify-end">
+            <img 
+              src="/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png" 
+              alt="Colorful rainbow socks" 
+              className="rounded-lg shadow-lg max-w-full lg:max-w-md h-auto"
+            />
           </div>
         </div>
       </div>
