@@ -9,22 +9,37 @@ import Footer from "@/components/Footer";
 import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Index = () => {
-  const { setLanguage } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const location = useLocation();
 
-  // Set language based on URL parameter if present
+  // Set language based on URL path
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const langParam = params.get('lang');
-    if (langParam && ['en', 'sw', 'fr'].includes(langParam)) {
-      setLanguage(langParam as 'en' | 'sw' | 'fr');
+    const path = location.pathname;
+    if (path.includes('/en')) {
+      setLanguage('en');
+    } else if (path.includes('/sw')) {
+      setLanguage('sw');
+    } else if (path.includes('/fr')) {
+      setLanguage('fr');
     }
-  }, [location.search, setLanguage]);
+  }, [location.pathname, setLanguage]);
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>AfriSocks Global - Sock Manufacturing Solutions for Africa</title>
+        <meta name="description" content="Your one-stop global partner for sock factory solutions in Africa" />
+        
+        {/* Hreflang tags for language alternatives */}
+        <link rel="alternate" hreflang="en" href="https://africasock.com/en" />
+        <link rel="alternate" hreflang="sw" href="https://africasock.com/sw" />
+        <link rel="alternate" hreflang="fr" href="https://africasock.com/fr" />
+        <link rel="canonical" href={`https://africasock.com${location.pathname}`} />
+      </Helmet>
+      
       <Navbar />
       <main>
         <Hero />

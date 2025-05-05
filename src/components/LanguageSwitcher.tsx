@@ -9,15 +9,21 @@ import {
   DropdownMenuItem, 
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
+import { useNavigate } from 'react-router-dom';
 
 const LanguageSwitcher = () => {
-  const { language, setLanguage } = useLanguage();
+  const { language } = useLanguage();
+  const navigate = useNavigate();
   
   const languages: { code: Language; name: string; flag: string }[] = [
     { code: 'en', name: 'English', flag: '🇬🇧' },
     { code: 'sw', name: 'Kiswahili', flag: '🇹🇿' },
     { code: 'fr', name: 'Français', flag: '🇫🇷' },
   ];
+  
+  const handleLanguageChange = (langCode: Language) => {
+    navigate(`/${langCode}`);
+  };
   
   return (
     <DropdownMenu>
@@ -30,7 +36,7 @@ const LanguageSwitcher = () => {
         {languages.map((lang) => (
           <DropdownMenuItem 
             key={lang.code}
-            onClick={() => setLanguage(lang.code)}
+            onClick={() => handleLanguageChange(lang.code)}
             className={language === lang.code ? "bg-accent font-medium" : ""}
           >
             <span className="mr-2">{lang.flag}</span>

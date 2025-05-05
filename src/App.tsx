@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
@@ -35,7 +35,12 @@ const App = () => (
         <BrowserRouter>
           <PageTracker />
           <Routes>
-            <Route path="/" element={<Index />} />
+            {/* Language-specific routes */}
+            <Route path="/en" element={<Index />} />
+            <Route path="/sw" element={<Index />} />
+            <Route path="/fr" element={<Index />} />
+            {/* Redirect root to default language (English) */}
+            <Route path="/" element={<Navigate to="/en" replace />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
