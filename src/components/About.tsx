@@ -1,17 +1,10 @@
-
 import { Button } from "@/components/ui/button";
-
 const About = () => {
-  return (
-    <section id="about" className="py-16 bg-white">
+  return <section id="about" className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
-            <img
-              src="https://images.unsplash.com/photo-1581078426770-6d336e5de7bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80"
-              alt="Our expert team"
-              className="rounded-lg shadow-lg w-full object-cover"
-            />
+            
           </div>
           <div className="lg:w-1/2">
             <h2 className="text-3xl md:text-4xl font-bold text-africa-brown mb-6">
@@ -58,8 +51,6 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default About;
