@@ -1,9 +1,6 @@
-
 import { Button } from "@/components/ui/button";
-
 const Hero = () => {
-  return (
-    <div className="relative bg-gradient-to-b from-africa-beige to-white py-16 md:py-24">
+  return <div className="relative bg-gradient-to-b from-africa-beige to-white py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center">
           <div className="lg:w-1/2 mb-10 lg:mb-0">
@@ -23,11 +20,7 @@ const Hero = () => {
             </div>
           </div>
           <div className="lg:w-1/2 lg:pl-12">
-            <img
-              src="https://images.unsplash.com/photo-1586438506563-ebdf96675653?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80"
-              alt="Modern sock factory equipment"
-              className="rounded-lg shadow-lg w-full object-cover"
-            />
+            <img src="https://images.unsplash.com/photo-1586438506563-ebdf96675653?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80" alt="Modern sock factory equipment" className="rounded-lg shadow-lg w-full object-cover" />
           </div>
         </div>
       </div>
@@ -35,7 +28,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 mt-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="p-4 bg-white rounded-lg shadow">
-            <p className="text-2xl md:text-3xl font-bold text-africa-orange">15+</p>
+            <p className="text-2xl md:text-3xl font-bold text-africa-orange">20+</p>
             <p className="text-gray-600">Years Experience</p>
           </div>
           <div className="p-4 bg-white rounded-lg shadow">
@@ -52,8 +45,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Hero;
