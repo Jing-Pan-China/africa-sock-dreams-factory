@@ -1,6 +1,8 @@
+
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
+
 const Testimonials = () => {
   const testimonials = [{
     name: "Emmanuel Okafor",
@@ -27,6 +29,41 @@ const Testimonials = () => {
     image: "/placeholder.svg",
     initials: "FD"
   }];
-  return;
+  
+  return (
+    <section id="testimonials" className="py-16 bg-africa-beige">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-africa-brown mb-10 text-center">
+          What Our Partners Say
+        </h2>
+        <Carousel className="w-full max-w-4xl mx-auto">
+          <CarouselContent>
+            {testimonials.map((testimonial, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">
+                <Card className="h-full">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <Avatar className="h-10 w-10 mr-3">
+                        <AvatarImage src={testimonial.image} alt={testimonial.name} />
+                        <AvatarFallback>{testimonial.initials}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-semibold text-africa-brown">{testimonial.name}</p>
+                        <p className="text-sm text-gray-500">{testimonial.position}</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-700">{testimonial.text}</p>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-0 -translate-x-1/2" />
+          <CarouselNext className="right-0 translate-x-1/2" />
+        </Carousel>
+      </div>
+    </section>
+  );
 };
+
 export default Testimonials;

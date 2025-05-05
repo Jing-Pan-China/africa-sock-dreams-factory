@@ -22,18 +22,6 @@ const Hero = () => {
               </Button>
             </div>
           </div>
-          <div className="lg:w-1/2 lg:pl-12 relative">
-            <img 
-              src="/lovable-uploads/d230f0c1-c100-4501-8504-b1981ecdc3fd.png" 
-              alt="Jing Pan's LinkedIn QR Code" 
-              className="rounded-lg shadow-lg mx-auto max-w-[300px]" 
-            />
-            <div className="mt-4 text-center">
-              <p className="text-lg font-semibold text-africa-brown flex items-center justify-center">
-                <Linkedin className="mr-2 text-blue-600" /> Jing Pan's LinkedIn - Welcome to connect!
-              </p>
-            </div>
-          </div>
         </div>
       </div>
       

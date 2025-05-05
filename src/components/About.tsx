@@ -1,10 +1,22 @@
+
 import { Button } from "@/components/ui/button";
+import { Linkedin } from "lucide-react";
+
 const About = () => {
   return <section id="about" className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12">
-          <div className="lg:w-1/2">
-            
+          <div className="lg:w-1/2 relative">
+            <img 
+              src="/lovable-uploads/d230f0c1-c100-4501-8504-b1981ecdc3fd.png" 
+              alt="Jing Pan's LinkedIn QR Code" 
+              className="rounded-lg shadow-lg mx-auto max-w-[300px]" 
+            />
+            <div className="mt-4 text-center">
+              <p className="text-lg font-semibold text-africa-brown flex items-center justify-center">
+                <Linkedin className="mr-2 text-blue-600" /> Jing Pan's LinkedIn - Welcome to connect!
+              </p>
+            </div>
           </div>
           <div className="lg:w-1/2">
             <h2 className="text-3xl md:text-4xl font-bold text-africa-brown mb-6">
