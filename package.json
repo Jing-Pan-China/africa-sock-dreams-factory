@@ -3,8 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-   "homepage": "https://Jing-Pan-China.github.io/africa-sock-dreams-factory"
-  "scripts": {
+ "homepage": "https://jing-pan-china.github.io/africa-sock-dreams-factory"
+ "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
