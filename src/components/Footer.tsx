@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter, MessageCircle } from "lucide-react";
 const Footer = () => {
   return <footer className="bg-gray-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
@@ -11,7 +11,12 @@ const Footer = () => {
             <p className="mb-6">
               Your trusted partner for sock manufacturing solutions across Africa and beyond.
             </p>
-            
+            <div className="flex space-x-4">
+              <a href="https://wa.me/8618356666977" target="_blank" rel="noopener noreferrer" className="bg-green-600 hover:bg-green-700 p-2 rounded-full transition-colors">
+                <MessageCircle className="h-5 w-5" />
+                <span className="sr-only">WhatsApp</span>
+              </a>
+            </div>
           </div>
           
           <div>
@@ -48,8 +53,17 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="pt-8 mt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-          <p>© {new Date().getFullYear()} AfriSocks Global. All rights reserved.</p>
+        <div className="pt-8 mt-8 border-t border-gray-800 text-sm">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400">© {new Date().getFullYear()} AfriSocks Global. All rights reserved.</p>
+            <div className="mt-4 md:mt-0 flex items-center">
+              <span className="text-gray-400 mr-2">WhatsApp:</span>
+              <a href="https://wa.me/8618356666977" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 flex items-center">
+                <MessageCircle className="h-4 w-4 mr-1" />
+                +86 18356666977 (China)
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>;
