@@ -1,4 +1,7 @@
+
 import { Button } from "@/components/ui/button";
+import { Linkedin } from "lucide-react";
+
 const Hero = () => {
   return <div className="relative bg-gradient-to-b from-africa-beige to-white py-16 md:py-24">
       <div className="container mx-auto px-4">
@@ -19,8 +22,17 @@ const Hero = () => {
               </Button>
             </div>
           </div>
-          <div className="lg:w-1/2 lg:pl-12">
-            <img src="https://images.unsplash.com/photo-1586438506563-ebdf96675653?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80" alt="Modern sock factory equipment" className="rounded-lg shadow-lg w-full object-cover" />
+          <div className="lg:w-1/2 lg:pl-12 relative">
+            <img 
+              src="/lovable-uploads/d230f0c1-c100-4501-8504-b1981ecdc3fd.png" 
+              alt="Jing Pan's LinkedIn QR Code" 
+              className="rounded-lg shadow-lg mx-auto max-w-[300px]" 
+            />
+            <div className="mt-4 text-center">
+              <p className="text-lg font-semibold text-africa-brown flex items-center justify-center">
+                <Linkedin className="mr-2 text-blue-600" /> Jing Pan's LinkedIn - Welcome to connect!
+              </p>
+            </div>
           </div>
         </div>
       </div>

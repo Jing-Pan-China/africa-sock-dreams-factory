@@ -1,3 +1,4 @@
+
 import { Facebook, Instagram, Linkedin, Twitter, MessageCircle } from "lucide-react";
 const Footer = () => {
   return <footer className="bg-gray-900 text-white pt-16 pb-8">
@@ -15,6 +16,10 @@ const Footer = () => {
               <a href="https://wa.me/8618356666977" target="_blank" rel="noopener noreferrer" className="bg-green-600 hover:bg-green-700 p-2 rounded-full transition-colors">
                 <MessageCircle className="h-5 w-5" />
                 <span className="sr-only">WhatsApp</span>
+              </a>
+              <a href="https://linkedin.com/in/jingpan" target="_blank" rel="noopener noreferrer" className="bg-blue-600 hover:bg-blue-700 p-2 rounded-full transition-colors">
+                <Linkedin className="h-5 w-5" />
+                <span className="sr-only">LinkedIn</span>
               </a>
             </div>
           </div>
@@ -56,11 +61,14 @@ const Footer = () => {
         <div className="pt-8 mt-8 border-t border-gray-800 text-sm">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400">© {new Date().getFullYear()} AfriSocks Global. All rights reserved.</p>
-            <div className="mt-4 md:mt-0 flex items-center">
-              <span className="text-gray-400 mr-2">WhatsApp:</span>
+            <div className="mt-4 md:mt-0 flex flex-col md:flex-row items-center gap-4">
               <a href="https://wa.me/8618356666977" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 flex items-center">
                 <MessageCircle className="h-4 w-4 mr-1" />
                 +86 18356666977 (China)
+              </a>
+              <a href="https://linkedin.com/in/jingpan" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center">
+                <Linkedin className="h-4 w-4 mr-1" />
+                Connect with Jing Pan
               </a>
             </div>
           </div>
