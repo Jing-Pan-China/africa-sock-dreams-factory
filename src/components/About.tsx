@@ -18,7 +18,7 @@ const About = () => {
               About AfriSocks Global
             </h2>
             <p className="text-lg text-gray-700 mb-6">
-             We offer end-to-end sock industry services, including factory setup. Our CEO, from a textile family with 20+ years of experience, is expanding globally after studying public health in Sweden. Inspired by African classmates, She aims to support local employment in Africa through the sock business.
+             We offer end-to-end sock industry services, including factory setup. Our CEO, Jing Pan, from a textile family with 20+ years of experience, is expanding globally after studying public health in Sweden. Inspired by African classmates, She aims to support local employment in Africa through the sock business.
             </p>
             <p className="text-lg text-gray-700 mb-6">
               Our mission is to empower African entrepreneurs and businesses to build successful sock manufacturing operations, creating jobs and fostering economic growth throughout the continent.
