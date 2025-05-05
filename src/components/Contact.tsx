@@ -1,18 +1,10 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { 
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { Mail, Phone, MapPin } from "lucide-react";
-
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -20,33 +12,40 @@ const Contact = () => {
     phone: "",
     country: "",
     interest: "",
-    message: "",
+    message: ""
   });
-  
   const [loading, setLoading] = useState(false);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const {
+      name,
+      value
+    } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
-
   const handleSelectChange = (name: string, value: string) => {
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+
     // Simulate form submission
     setTimeout(() => {
       setLoading(false);
       toast({
         title: "Message Sent",
-        description: "Thank you for your interest! Our team will contact you shortly.",
+        description: "Thank you for your interest! Our team will contact you shortly."
       });
-      
+
       // Reset form
       setFormData({
         name: "",
@@ -54,13 +53,11 @@ const Contact = () => {
         phone: "",
         country: "",
         interest: "",
-        message: "",
+        message: ""
       });
     }, 1500);
   };
-
-  return (
-    <section id="contact" className="py-16 bg-africa-brown text-white">
+  return <section id="contact" className="py-16 bg-africa-brown text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -81,8 +78,8 @@ const Contact = () => {
                   <Mail className="mr-4 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold mb-1">Email Us</h4>
-                    <p>info@afrisocksglobal.com</p>
-                    <p>sales@afrisocksglobal.com</p>
+                    <p>jingpan0523@yeah.net</p>
+                    <p></p>
                   </div>
                 </div>
                 
@@ -90,8 +87,8 @@ const Contact = () => {
                   <Phone className="mr-4 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold mb-1">Call Us</h4>
-                    <p>+1-234-567-8900 (International)</p>
-                    <p>+27-123-456-7890 (Africa)</p>
+                    <p>+86-18356666977 (International)</p>
+                    <p></p>
                   </div>
                 </div>
                 
@@ -129,28 +126,13 @@ const Contact = () => {
                     <label htmlFor="name" className="block mb-2 font-medium text-gray-700">
                       Your Name
                     </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      placeholder="John Doe"
-                    />
+                    <Input id="name" name="name" value={formData.name} onChange={handleChange} required placeholder="John Doe" />
                   </div>
                   <div>
                     <label htmlFor="email" className="block mb-2 font-medium text-gray-700">
                       Email Address
                     </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      placeholder="john@example.com"
-                    />
+                    <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="john@example.com" />
                   </div>
                 </div>
                 
@@ -159,26 +141,13 @@ const Contact = () => {
                     <label htmlFor="phone" className="block mb-2 font-medium text-gray-700">
                       Phone Number
                     </label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="+1-234-567-8900"
-                    />
+                    <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="+1-234-567-8900" />
                   </div>
                   <div>
                     <label htmlFor="country" className="block mb-2 font-medium text-gray-700">
                       Country
                     </label>
-                    <Input
-                      id="country"
-                      name="country"
-                      value={formData.country}
-                      onChange={handleChange}
-                      required
-                      placeholder="Nigeria, Kenya, etc."
-                    />
+                    <Input id="country" name="country" value={formData.country} onChange={handleChange} required placeholder="Nigeria, Kenya, etc." />
                   </div>
                 </div>
                 
@@ -186,10 +155,7 @@ const Contact = () => {
                   <label htmlFor="interest" className="block mb-2 font-medium text-gray-700">
                     I'm Interested In
                   </label>
-                  <Select
-                    value={formData.interest}
-                    onValueChange={(value) => handleSelectChange("interest", value)}
-                  >
+                  <Select value={formData.interest} onValueChange={value => handleSelectChange("interest", value)}>
                     <SelectTrigger id="interest">
                       <SelectValue placeholder="Select your interest" />
                     </SelectTrigger>
@@ -208,21 +174,10 @@ const Contact = () => {
                   <label htmlFor="message" className="block mb-2 font-medium text-gray-700">
                     Your Message
                   </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Please describe your requirements in detail..."
-                    rows={5}
-                  />
+                  <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Please describe your requirements in detail..." rows={5} />
                 </div>
                 
-                <Button 
-                  type="submit"
-                  className="w-full bg-africa-orange hover:bg-africa-terracotta text-white py-6 text-lg"
-                  disabled={loading}
-                >
+                <Button type="submit" className="w-full bg-africa-orange hover:bg-africa-terracotta text-white py-6 text-lg" disabled={loading}>
                   {loading ? "Sending..." : "Submit Inquiry"}
                 </Button>
               </form>
@@ -230,8 +185,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Contact;
