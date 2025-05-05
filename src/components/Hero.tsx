@@ -1,7 +1,5 @@
-
 import { Button } from "@/components/ui/button";
 import { Linkedin } from "lucide-react";
-
 const Hero = () => {
   return <div className="relative bg-gradient-to-b from-africa-beige to-white py-16 md:py-24">
       <div className="container mx-auto px-4">
@@ -36,7 +34,7 @@ const Hero = () => {
             <p className="text-gray-600">African Countries</p>
           </div>
           <div className="p-4 bg-white rounded-lg shadow">
-            <p className="text-2xl md:text-3xl font-bold text-africa-orange">200+</p>
+            <p className="text-2xl md:text-3xl font-bold text-africa-orange">16+</p>
             <p className="text-gray-600">Factories Built</p>
           </div>
           <div className="p-4 bg-white rounded-lg shadow">
