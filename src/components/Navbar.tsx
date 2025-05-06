@@ -12,7 +12,7 @@ const Navbar = () => {
   const menuItems = [
     { href: "#services", label: "Services" },
     { href: "#benefits", label: "Benefits" },
-    { href: "#about", label: "About" },
+    { href: "#about", label: "About us" },
   ];
 
   return (
