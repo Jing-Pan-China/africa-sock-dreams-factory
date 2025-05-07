@@ -17,7 +17,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 60000, // 1 minute
-      cacheTime: 300000, // 5 minutes
+      gcTime: 300000, // 5 minutes (formerly cacheTime)
       retry: 1,
       refetchOnWindowFocus: false,
     },
@@ -38,6 +38,28 @@ const PageTracker = () => {
   
   return null;
 };
+
+// Preload current language translations based on route
+const preloadCurrentLanguage = async (path: string) => {
+  let lang = 'en'; // Default
+  
+  if (path.includes('/sw')) {
+    lang = 'sw';
+  } else if (path.includes('/fr')) {
+    lang = 'fr';
+  }
+  
+  try {
+    // Dynamic import of the current language
+    await import(`./translations/${lang}.ts`);
+    console.log(`Preloaded ${lang} translations`);
+  } catch (error) {
+    console.error(`Failed to preload ${lang} translations:`, error);
+  }
+};
+
+// Initial preload based on pathname
+preloadCurrentLanguage(window.location.pathname);
 
 const App = () => {
   // Handle offline status

@@ -3,43 +3,45 @@ import {
   Settings, 
   Package, 
   Globe, 
-  Truck 
+  Truck,
+  Loader2
 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { memo } from "react";
 
-const Services = () => {
-  const { t } = useLanguage();
+const Services = memo(() => {
+  const { t, isLoading } = useLanguage();
   
   const serviceItems = [
     {
       icon: Settings,
-      title: t("services.machines.title"),
-      description: t("services.machines.description"),
+      title: isLoading ? "Sock Machines" : t("services.machines.title"),
+      description: isLoading ? "State-of-the-art sock knitting machinery for all production scales." : t("services.machines.description"),
       color: "text-blue-600",
       bg: "bg-blue-50",
       ariaLabel: "Sock knitting machinery"
     },
     {
       icon: Package,
-      title: t("services.yarns.title"),
-      description: t("services.yarns.description"),
+      title: isLoading ? "Quality Yarns" : t("services.yarns.title"),
+      description: isLoading ? "Premium yarns sourced globally for sock production." : t("services.yarns.description"),
       color: "text-green-600",
       bg: "bg-green-50",
       ariaLabel: "Premium yarns for sock production"
     },
     {
       icon: Globe,
-      title: t("services.export.title"),
-      description: t("services.export.description"),
+      title: isLoading ? "Export Services" : t("services.export.title"),
+      description: isLoading ? "Comprehensive export solutions for sock manufacturers." : t("services.export.description"),
       color: "text-purple-600",
       bg: "bg-purple-50",
       ariaLabel: "Export services for sock manufacturers"
     },
     {
       icon: Truck,
-      title: t("services.socks.title"),
-      description: t("services.socks.description"),
+      title: isLoading ? "Finished Socks" : t("services.socks.title"),
+      description: isLoading ? "High-quality sock products in various styles and materials." : t("services.socks.description"),
       color: "text-africa-orange",
       bg: "bg-africa-beige",
       ariaLabel: "Ready-made sock products"
@@ -50,11 +52,18 @@ const Services = () => {
     <section id="services" className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-africa-brown mb-4">
-            {t("services.title")}
+          <h2 className="text-3xl md:text-4xl font-bold text-africa-brown mb-4 relative">
+            {isLoading ? (
+              <div className="inline-flex items-center">
+                Our Comprehensive Sock Solutions
+                <Loader2 className="ml-2 w-6 h-6 animate-spin" />
+              </div>
+            ) : (
+              t("services.title")
+            )}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            {t("services.subtitle")}
+            {isLoading ? "From setting up your own factory to supplying ready-made products." : t("services.subtitle")}
           </p>
         </div>
         
@@ -76,6 +85,8 @@ const Services = () => {
       </div>
     </section>
   );
-};
+});
+
+Services.displayName = "Services";
 
 export default Services;

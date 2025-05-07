@@ -1,7 +1,7 @@
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -14,20 +14,34 @@ const Contact = lazy(() => import("@/components/Contact"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, isLoading } = useLanguage();
   const location = useLocation();
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   // Set language based on URL path
   useEffect(() => {
     const path = location.pathname;
+    let newLang;
+    
     if (path.includes('/en')) {
-      setLanguage('en');
+      newLang = 'en';
     } else if (path.includes('/sw')) {
-      setLanguage('sw');
+      newLang = 'sw';
     } else if (path.includes('/fr')) {
-      setLanguage('fr');
+      newLang = 'fr';
+    } else {
+      newLang = 'en'; // Default
     }
-  }, [location.pathname, setLanguage]);
+    
+    if (newLang !== language) {
+      setLanguage(newLang as 'en' | 'sw' | 'fr');
+    }
+    
+    // After initial path-based language detection
+    if (isInitialLoad) {
+      setIsInitialLoad(false);
+    }
+  }, [location.pathname, setLanguage, language, isInitialLoad]);
 
   return (
     <div className="min-h-screen">
@@ -47,22 +61,26 @@ const Index = () => {
         {/* Hero is loaded eagerly as it's above the fold */}
         <Hero />
         
-        {/* Lazy load components below the fold with null fallback */}
-        <Suspense fallback={null}>
-          <Services />
-        </Suspense>
-        
-        <Suspense fallback={null}>
-          <AfricanBenefits />
-        </Suspense>
-        
-        <Suspense fallback={null}>
-          <About />
-        </Suspense>
-        
-        <Suspense fallback={null}>
-          <Contact />
-        </Suspense>
+        {/* Only load components below the fold after initial language load */}
+        {!isLoading && (
+          <>
+            <Suspense fallback={<div className="h-96" />}>
+              <Services />
+            </Suspense>
+            
+            <Suspense fallback={<div className="h-96" />}>
+              <AfricanBenefits />
+            </Suspense>
+            
+            <Suspense fallback={<div className="h-96" />}>
+              <About />
+            </Suspense>
+            
+            <Suspense fallback={<div className="h-96" />}>
+              <Contact />
+            </Suspense>
+          </>
+        )}
       </main>
       
       <Suspense fallback={null}>

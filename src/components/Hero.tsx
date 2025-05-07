@@ -2,9 +2,10 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 const Hero = () => {
-  const { t } = useLanguage();
+  const { t, isLoading } = useLanguage();
   const [imageLoaded, setImageLoaded] = useState(false);
   
   useEffect(() => {
@@ -19,17 +20,24 @@ const Hero = () => {
         <div className="flex flex-col lg:flex-row items-center">
           <div className="lg:w-1/2 mb-10 lg:mb-0">
             <h1 className="text-3xl md:text-5xl font-bold mb-4 text-africa-brown leading-tight">
-              {t("hero.title")}
+              {isLoading ? (
+                <div className="flex items-center space-x-2">
+                  <span>Building Africa's Sock Manufacturing Future</span>
+                  <Loader2 className="w-6 h-6 animate-spin" />
+                </div>
+              ) : (
+                t("hero.title")
+              )}
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8">
-              {t("hero.subtitle")}
+              {isLoading ? "Your one-stop global partner for sock factory solutions..." : t("hero.subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
               <Button asChild className="bg-africa-orange hover:bg-africa-terracotta text-white text-lg py-6 px-8">
-                <a href="#contact">{t("hero.cta.factory")}</a>
+                <a href="#contact">{isLoading ? "Start Your Factory" : t("hero.cta.factory")}</a>
               </Button>
               <Button asChild variant="outline" className="border-africa-brown text-africa-brown hover:bg-africa-brown hover:text-white text-lg py-6 px-8">
-                <a href="#services">{t("hero.cta.services")}</a>
+                <a href="#services">{isLoading ? "Explore Services" : t("hero.cta.services")}</a>
               </Button>
             </div>
           </div>
@@ -53,19 +61,19 @@ const Hero = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="p-4 bg-white rounded-lg shadow">
             <p className="text-2xl md:text-3xl font-bold text-africa-orange">20+</p>
-            <p className="text-gray-600">{t("hero.stats.experience")}</p>
+            <p className="text-gray-600">{isLoading ? "Years Experience" : t("hero.stats.experience")}</p>
           </div>
           <div className="p-4 bg-white rounded-lg shadow">
             <p className="text-2xl md:text-3xl font-bold text-africa-orange">10+</p>
-            <p className="text-gray-600">{t("hero.stats.countries")}</p>
+            <p className="text-gray-600">{isLoading ? "African Countries" : t("hero.stats.countries")}</p>
           </div>
           <div className="p-4 bg-white rounded-lg shadow">
             <p className="text-2xl md:text-3xl font-bold text-africa-orange">16+</p>
-            <p className="text-gray-600">{t("hero.stats.factories")}</p>
+            <p className="text-gray-600">{isLoading ? "Factories Built" : t("hero.stats.factories")}</p>
           </div>
           <div className="p-4 bg-white rounded-lg shadow">
             <p className="text-2xl md:text-3xl font-bold text-africa-orange">98%</p>
-            <p className="text-gray-600">{t("hero.stats.satisfaction")}</p>
+            <p className="text-gray-600">{isLoading ? "Client Satisfaction" : t("hero.stats.satisfaction")}</p>
           </div>
         </div>
       </div>
