@@ -59,8 +59,9 @@ const initializeApp = async () => {
 // Start initialization process
 initializeApp();
 
-// Add Google Analytics to window object for type safety
+// Add Google Analytics to window object with proper types
 window.dataLayer = window.dataLayer || [];
 window.gtag = function() {
   window.dataLayer.push(arguments);
 };
+

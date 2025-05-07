@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -32,6 +31,7 @@ const PageTracker = () => {
   const location = useLocation();
   
   useEffect(() => {
+    // With proper type definition, we don't need type checking here
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'page_view', {
         page_path: location.pathname + location.search
