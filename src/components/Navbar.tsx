@@ -3,12 +3,13 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const currentLang = location.pathname.split('/')[1] || 'en';
 
   // Handle scroll for sticky header effect
   useEffect(() => {
@@ -29,10 +30,13 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  // Helper function to create section links that work with the current language
+  const createSectionLink = (section: string) => `/${currentLang}${section}`;
+
   const menuItems = [
-    { href: "#services", label: "Services" },
-    { href: "#benefits", label: "Benefits" },
-    { href: "#about", label: "About us" },
+    { href: createSectionLink("#services"), label: "Services" },
+    { href: createSectionLink("#benefits"), label: "Benefits" },
+    { href: createSectionLink("#about"), label: "About us" },
   ];
 
   return (
@@ -40,10 +44,10 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <a href="/" className="flex items-center">
+          <Link to={`/${currentLang}`} className="flex items-center">
             <span className="text-2xl font-bold text-africa-orange">AfriSocks</span>
             <span className="text-sm ml-1 text-africa-brown">Global</span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
@@ -52,13 +56,29 @@ const Navbar = () => {
                 key={item.href}
                 href={item.href}
                 className="text-gray-700 hover:text-africa-orange font-medium transition-colors"
+                onClick={(e) => {
+                  // Handle section scrolling without page reload
+                  if (item.href.includes('#')) {
+                    e.preventDefault();
+                    const sectionId = item.href.split('#')[1];
+                    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
               >
                 {item.label}
               </a>
             ))}
             <LanguageSwitcher />
             <Button asChild className="bg-africa-orange hover:bg-africa-terracotta text-white">
-              <a href="#contact">Contact Us</a>
+              <a 
+                href={`/${currentLang}#contact`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Contact Us
+              </a>
             </Button>
           </nav>
 
@@ -86,13 +106,29 @@ const Navbar = () => {
                   key={item.href}
                   href={item.href}
                   className="text-gray-700 hover:text-africa-orange font-medium py-2 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMenuOpen(false);
+                    if (item.href.includes('#')) {
+                      const sectionId = item.href.split('#')[1];
+                      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                 >
                   {item.label}
                 </a>
               ))}
               <Button asChild className="bg-africa-orange hover:bg-africa-terracotta text-white w-full">
-                <a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact Us</a>
+                <a 
+                  href={`/${currentLang}#contact`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMenuOpen(false);
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Contact Us
+                </a>
               </Button>
             </nav>
           </div>

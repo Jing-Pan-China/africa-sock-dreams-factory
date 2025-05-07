@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 
 interface ImageWithFallbackProps {
   src: string;
@@ -26,6 +26,7 @@ const ImageWithFallback = ({
 }: ImageWithFallbackProps) => {
   const [imgSrc, setImgSrc] = useState<string>(src);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isInView, setIsInView] = useState<boolean>(loading === "eager");
   const imgRef = useRef<HTMLImageElement>(null);
   
   useEffect(() => {
@@ -35,49 +36,48 @@ const ImageWithFallback = ({
       setIsLoaded(false);
       
       // Check if image is cached
-      const img = new Image();
-      img.src = src;
-      if (img.complete) {
+      if (loading === "eager" || imgRef.current?.complete) {
         setIsLoaded(true);
       }
     }
     
     // Use Intersection Observer for better lazy loading
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const target = entry.target as HTMLImageElement;
-          // Start loading the image when it's in viewport
-          if (target.dataset.src) {
-            target.src = target.dataset.src;
+    if (loading === "lazy") {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setIsInView(true);
+            observer.unobserve(entry.target);
           }
-          observer.unobserve(target);
-        }
+        });
+      }, { 
+        rootMargin: '200px', // Start loading 200px before the image enters viewport
+        threshold: 0.01 
       });
-    }, { 
-      rootMargin: '200px', // Start loading 200px before the image enters viewport
-      threshold: 0.01 
-    });
-    
-    if (imgRef.current && loading === "lazy") {
-      observer.observe(imgRef.current);
-    }
-    
-    return () => {
+      
       if (imgRef.current) {
-        observer.unobserve(imgRef.current);
+        observer.observe(imgRef.current);
       }
-    };
+      
+      return () => {
+        if (imgRef.current) {
+          observer.unobserve(imgRef.current);
+        }
+      };
+    }
   }, [src, loading]);
 
+  // Use native loading="lazy" for browsers that support it
+  // but also our custom implementation for browsers that don't
+  const actualSrc = (isInView || loading === "eager") ? imgSrc : undefined;
+
   return (
-    <div className={`relative ${!isLoaded ? "bg-gray-200 animate-pulse" : ""}`}>
+    <div className={`relative ${!isLoaded ? "bg-gray-200 animate-pulse" : ""} ${className || ""}`}>
       <img
         ref={imgRef}
-        src={imgSrc}
-        data-src={loading === "lazy" ? imgSrc : undefined}
+        src={actualSrc}
         alt={alt}
-        className={`${className} ${isLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
+        className={`w-full h-auto ${isLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
         width={width}
         height={height}
         loading={loading}
@@ -87,9 +87,16 @@ const ImageWithFallback = ({
         onError={() => {
           setImgSrc(fallbackSrc);
         }}
+        style={{
+          // Apply proper aspect ratio through CSS if width and height are provided
+          aspectRatio: width && height && typeof width === 'number' && typeof height === 'number' 
+            ? `${width} / ${height}` 
+            : 'auto'
+        }}
       />
     </div>
   );
 };
 
-export default ImageWithFallback;
+// Memoize the component to prevent unnecessary re-renders
+export default memo(ImageWithFallback);

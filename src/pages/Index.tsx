@@ -1,40 +1,14 @@
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import { lazy, Suspense, useEffect, useCallback } from "react";
+import { lazy, Suspense, useEffect, useCallback, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Skeleton } from "@/components/ui/skeleton";
+import useScrollRestoration from "@/hooks/useScrollRestoration";
 
-// Improved chunk naming and more granular code splitting
-const Services = lazy(() => 
-  import(/* webpackChunkName: "services" */ "@/components/Services").then(module => ({
-    default: module.default
-  }))
-);
-const AfricanBenefits = lazy(() => 
-  import(/* webpackChunkName: "african-benefits" */ "@/components/AfricanBenefits").then(module => ({
-    default: module.default
-  }))
-);
-const About = lazy(() => 
-  import(/* webpackChunkName: "about" */ "@/components/About").then(module => ({
-    default: module.default
-  }))
-);
-const Contact = lazy(() => 
-  import(/* webpackChunkName: "contact" */ "@/components/Contact").then(module => ({
-    default: module.default
-  }))
-);
-const Footer = lazy(() => 
-  import(/* webpackChunkName: "footer" */ "@/components/Footer").then(module => ({
-    default: module.default
-  }))
-);
-
-// Enhanced loading placeholder
+// Enhanced loading placeholder with animation
 const LoadingSection = () => (
   <div className="w-full py-12">
     <div className="container mx-auto px-4">
@@ -48,18 +22,68 @@ const LoadingSection = () => (
   </div>
 );
 
-// Advanced lazy loading component with deferred loading
-const LazyComponent = ({ children, priority = false }: { children: React.ReactNode, priority?: boolean }) => {
+// Improved chunk naming and progressively loaded components
+const Services = lazy(() => 
+  import(/* webpackChunkName: "services" */ "@/components/Services")
+);
+const AfricanBenefits = lazy(() => 
+  import(/* webpackChunkName: "african-benefits" */ "@/components/AfricanBenefits")
+);
+const About = lazy(() => 
+  import(/* webpackChunkName: "about" */ "@/components/About")
+);
+const Contact = lazy(() => 
+  import(/* webpackChunkName: "contact" */ "@/components/Contact")
+);
+const Footer = lazy(() => 
+  import(/* webpackChunkName: "footer" */ "@/components/Footer")
+);
+
+// Advanced lazy loading component with better error handling
+const LazyComponent = ({ 
+  children, 
+  fallback = <LoadingSection />,
+  errorFallback = <div className="p-4 text-center text-red-500">Failed to load this section</div>
+}: { 
+  children: React.ReactNode, 
+  fallback?: React.ReactNode,
+  errorFallback?: React.ReactNode
+}) => {
+  const [hasError, setHasError] = useState(false);
+  
+  if (hasError) {
+    return <>{errorFallback}</>;
+  }
+  
   return (
-    <Suspense fallback={<LoadingSection />}>
-      {children}
+    <Suspense fallback={fallback}>
+      <ErrorBoundary onError={() => setHasError(true)}>
+        {children}
+      </ErrorBoundary>
     </Suspense>
   );
 };
 
+// Simple error boundary component
+class ErrorBoundary extends React.Component<{
+  children: React.ReactNode;
+  onError: () => void;
+}> {
+  componentDidCatch() {
+    this.props.onError();
+  }
+  
+  render() {
+    return this.props.children;
+  }
+}
+
 const Index = () => {
   const { language, setLanguage } = useLanguage();
   const location = useLocation();
+  
+  // Use our custom hook for scroll restoration
+  useScrollRestoration();
 
   // Set language based on URL path
   useEffect(() => {
@@ -73,64 +97,51 @@ const Index = () => {
     }
   }, [location.pathname, setLanguage]);
 
-  // Optimized preloading logic using requestIdleCallback
-  const preloadComponent = useCallback((importFunc: () => Promise<any>) => {
-    if (typeof window.requestIdleCallback === 'function') {
-      window.requestIdleCallback(() => {
-        importFunc().catch(() => {}); // Silent catch to avoid errors in console
-      });
-    } else {
-      // Fallback for browsers that don't support requestIdleCallback
-      setTimeout(() => {
-        importFunc().catch(() => {});
-      }, 1000);
-    }
-  }, []);
-
-  // Enhanced intersection observer with requestIdleCallback
+  // Optimized intersection observer setup for progressive component loading
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          if (id) {
-            // Preload the next section when current section is visible
-            const preloadMap: Record<string, () => Promise<any>> = {
-              'services-section': () => import("@/components/AfricanBenefits"),
-              'benefits-section': () => import("@/components/About"),
-              'about-section': () => import("@/components/Contact")
-            };
-            
-            const preloadFunc = preloadMap[id];
-            if (preloadFunc) {
-              preloadComponent(preloadFunc);
-            }
+          const section = entry.target.getAttribute('data-section');
+          
+          // Load specific components based on which section is visible
+          if (section === 'services') {
+            import("@/components/AfricanBenefits");
+          } else if (section === 'benefits') {
+            import("@/components/About");
+          } else if (section === 'about') {
+            import("@/components/Contact");
           }
+          
+          // Stop observing once we've triggered the load
           observer.unobserve(entry.target);
         }
       });
-    }, { 
-      rootMargin: '200px', // Load earlier
-      threshold: 0.01 // Trigger with minimal visibility
+    };
+    
+    const observer = new IntersectionObserver(observerCallback, {
+      rootMargin: '300px', // Load 300px before section comes into view
+      threshold: 0.01
     });
     
-    // Observe all sections for visibility
-    document.querySelectorAll('section[id]').forEach(section => {
+    // Observe all section placeholders
+    document.querySelectorAll('[data-section]').forEach(section => {
       observer.observe(section);
     });
     
-    return () => {
-      observer.disconnect();
-    };
-  }, [preloadComponent]);
-
-  // Preload further sections after initial render
+    return () => observer.disconnect();
+  }, []);
+  
+  // Preload the most critical next section after the component mounts
   useEffect(() => {
-    if (typeof window.requestIdleCallback === 'function') {
-      window.requestIdleCallback(() => {
-        import("@/components/Services");
-      });
-    }
+    // Use requestIdleCallback for non-critical preloading
+    const requestIdleCallback = window.requestIdleCallback || 
+      ((cb) => setTimeout(cb, 1000));
+    
+    requestIdleCallback(() => {
+      // Start loading Services component when the browser is idle
+      import("@/components/Services");
+    });
   }, []);
 
   return (
@@ -146,7 +157,7 @@ const Index = () => {
         <link rel="canonical" href={`https://africasock.com${location.pathname}`} />
         
         {/* Performance optimizations */}
-        <link rel="preload" href="/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png" as="image" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       </Helmet>
       
       <Navbar />
@@ -154,24 +165,24 @@ const Index = () => {
         {/* Hero is loaded eagerly as it's above the fold */}
         <Hero />
         
-        {/* Lazy load components below the fold with section ids for intersection observer */}
-        <section id="services-section">
+        {/* Progressive loading of below-the-fold sections */}
+        <div data-section="services" id="services">
           <LazyComponent>
             <Services />
           </LazyComponent>
-        </section>
+        </div>
         
-        <section id="benefits-section">
+        <div data-section="benefits" id="benefits">
           <LazyComponent>
             <AfricanBenefits />
           </LazyComponent>
-        </section>
+        </div>
         
-        <section id="about-section">
+        <div data-section="about" id="about">
           <LazyComponent>
             <About />
           </LazyComponent>
-        </section>
+        </div>
         
         <LazyComponent>
           <Contact />

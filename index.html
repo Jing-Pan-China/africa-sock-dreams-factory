@@ -2,38 +2,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-K4VWD9BJ');</script>
-<!-- End Google Tag Manager -->
-    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sock Machines & Sock Yarn from China – Factory Solutions for Africa</title>
 
     <!-- Enhanced Critical CSS with animation optimizations -->
     <style>
-      .critical-spinner{display:flex;justify-content:center;align-items:center;height:100vh;background-color:#F5F5DC}
       body{margin:0;font-family:system-ui,-apple-system,sans-serif;text-rendering:optimizeSpeed}
       html{scroll-behavior:smooth}
+      .critical-spinner{display:flex;justify-content:center;align-items:center;height:100vh;background-color:#F5F5DC}
+      .loading-spinner{width:40px;height:40px;border:4px solid rgba(0,0,0,0.1);border-radius:50%;border-top:4px solid #FF7D1A;animation:spin 1s linear infinite;margin-bottom:16px}
+      @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
       @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-      @keyframes pulse{0%,100%{opacity:.6}50%{opacity:.3}}
-      .pulse-loading{animation:pulse 1.5s ease-in-out infinite}
       .fade-in{animation:fadeIn .5s ease-out}
       .container{width:100%;max-width:1200px;margin:0 auto;padding:0 1rem}
       .bg-africa-beige{background-color:#F5F5DC}
-      .flex{display:flex}
-      .items-center{align-items:center}
-      .justify-center{justify-content:center}
-      .h-screen{height:100vh}
-      .w-screen{width:100vw}
-      
-      /* Content-visibility for better rendering performance */
-      .cv-auto{content-visibility:auto;contain-intrinsic-size:0 500px}
-      
+      .text-center{text-align:center}
+
       /* Disable animations if user prefers reduced motion */
       @media (prefers-reduced-motion:reduce){
         *{animation-duration:0.01ms !important;transition-duration:0.01ms !important;scroll-behavior:auto !important}
@@ -46,39 +31,62 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="keywords" content="sock manufacturing China, Africa sock, sock knitting machine China, sock machines China, sock factory China, sock production solution China, sock yarn China, custom sock factory solutions" />
 
     <link rel="canonical" href="https://africasock.com/" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:locale:alternate" content="zh_CN" />
-    <meta property="og:locale:alternate" content="fr_FR" />
-    <meta property="og:locale:alternate" content="es_ES" />
-    
-    <meta property="og:title" content="AfriSocks Global - Sock Factory Solutions for Africa" />
-    <meta property="og:description" content="One-stop sock factory solutions for Africa - machines, yarns, export services, and high-quality socks." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://africasock.com/" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
     
     <!-- Enhanced resource hints for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     
     <!-- Preload critical hero image with fetchpriority -->
     <link rel="preload" href="/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png" as="image" fetchpriority="high">
     
-    <!-- Optimized font loading strategy -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- Optimized font loading strategy with font-display: swap -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
     <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
     </noscript>
     
-    <!-- Add DNS prefetch for critical domains -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <!-- Defer non-critical third-party scripts -->
+    <script>
+      // Defer Google Tag Manager loading to prevent render-blocking
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const gtmScript = document.createElement('script');
+          gtmScript.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-K4VWD9BJ');`;
+          document.head.appendChild(gtmScript);
+          
+          const gtmNoScript = document.createElement('noscript');
+          gtmNoScript.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4VWD9BJ" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+          document.body.appendChild(gtmNoScript);
+        }, 2000); // Delay GTM loading by 2 seconds to improve initial page load
+      });
+      
+      // Initialize dataLayer early before GTM loads
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function() {
+        window.dataLayer.push(arguments);
+      };
+      
+      // Inline script for immediately starting image preload
+      (function() {
+        var img = new Image();
+        img.fetchPriority = "high";
+        img.src = "/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png";
+      })();
+      
+      // Register service worker for offline support
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(function() { 
+              console.log('Service worker registered');
+            })
+            .catch(function(err) {
+              console.log('Service worker registration failed: ', err);
+            });
+        });
+      }
+    </script>
     
     <!-- Provide a loading indicator for browsers that don't support JavaScript -->
     <noscript>
@@ -90,14 +98,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </head>
 
   <body>
-   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4VWD9BJ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    
     <div id="root">
       <div class="critical-spinner">
-        <div class="pulse-loading"></div>
+        <div class="text-center">
+          <div class="loading-spinner"></div>
+          <p>Loading AfriSocks Global...</p>
+        </div>
       </div>
       <noscript>
         <div class="noscript-message">
@@ -111,14 +117,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
     <!-- Add module preload for main entry point -->
     <link rel="modulepreload" href="/src/main.tsx">
-    <script type="module" src="/src/main.tsx" async></script>
-    
-    <!-- Inline tiny script for immediately starting image preload -->
-    <script>
-      (function() {
-        var img = new Image();
-        img.src = "/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png";
-      })();
-    </script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
