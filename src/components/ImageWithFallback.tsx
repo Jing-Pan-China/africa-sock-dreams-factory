@@ -52,7 +52,7 @@ const ImageWithFallback = ({
         height={height}
         loading={loading}
         decoding={decoding}
-        fetchpriority={fetchPriority}
+        fetchPriority={fetchPriority}
         onLoad={() => setIsLoaded(true)}
         onError={() => {
           setImgSrc(fallbackSrc);
