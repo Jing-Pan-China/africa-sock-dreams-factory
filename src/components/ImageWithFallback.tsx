@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef, memo } from "react";
+import { useState, useEffect } from "react";
 
 interface ImageWithFallbackProps {
   src: string;
@@ -22,62 +22,22 @@ const ImageWithFallback = ({
   height,
   loading = "lazy",
   decoding = "async",
-  fetchPriority = "auto"
+  fetchPriority
 }: ImageWithFallbackProps) => {
   const [imgSrc, setImgSrc] = useState<string>(src);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [isInView, setIsInView] = useState<boolean>(loading === "eager");
-  const imgRef = useRef<HTMLImageElement>(null);
-  
-  useEffect(() => {
-    // Reset states when src changes
-    if (src) {
-      setImgSrc(src);
-      setIsLoaded(false);
-      
-      // Check if image is cached
-      if (loading === "eager" || imgRef.current?.complete) {
-        setIsLoaded(true);
-      }
-    }
-    
-    // Use Intersection Observer for better lazy loading
-    if (loading === "lazy") {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setIsInView(true);
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { 
-        rootMargin: '200px', // Start loading 200px before the image enters viewport
-        threshold: 0.01 
-      });
-      
-      if (imgRef.current) {
-        observer.observe(imgRef.current);
-      }
-      
-      return () => {
-        if (imgRef.current) {
-          observer.unobserve(imgRef.current);
-        }
-      };
-    }
-  }, [src, loading]);
 
-  // Use native loading="lazy" for browsers that support it
-  // but also our custom implementation for browsers that don't
-  const actualSrc = (isInView || loading === "eager") ? imgSrc : undefined;
+  useEffect(() => {
+    setImgSrc(src);
+    setIsLoaded(false);
+  }, [src]);
 
   return (
-    <div className={`relative ${!isLoaded ? "bg-gray-200 animate-pulse" : ""} ${className || ""}`}>
+    <div className={`relative ${!isLoaded ? "bg-gray-200 animate-pulse" : ""}`}>
       <img
-        ref={imgRef}
-        src={actualSrc}
+        src={imgSrc}
         alt={alt}
-        className={`w-full h-auto ${isLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
+        className={`${className} ${isLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
         width={width}
         height={height}
         loading={loading}
@@ -87,16 +47,9 @@ const ImageWithFallback = ({
         onError={() => {
           setImgSrc(fallbackSrc);
         }}
-        style={{
-          // Apply proper aspect ratio through CSS if width and height are provided
-          aspectRatio: width && height && typeof width === 'number' && typeof height === 'number' 
-            ? `${width} / ${height}` 
-            : 'auto'
-        }}
       />
     </div>
   );
 };
 
-// Memoize the component to prevent unnecessary re-renders
-export default memo(ImageWithFallback);
+export default ImageWithFallback;
