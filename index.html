@@ -14,6 +14,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sock Machines & Sock Yarn from China – Factory Solutions for Africa</title>
 
+    <!-- Critical CSS inline for faster rendering -->
+    <style>
+      .critical-spinner{display:flex;justify-content:center;align-items:center;height:100vh;background-color:#F5F5DC}
+      body{margin:0;font-family:system-ui,-apple-system,sans-serif}
+      @keyframes pulse{0%,100%{opacity:.6}50%{opacity:.3}}
+      .pulse-loading{animation:pulse 1.5s ease-in-out infinite}
+    </style>
 
     <meta name="description" content="China-based sock factory solutions for Africa: sock knitting machines, quality yarn, export support, and custom sock production. Multilingual service available." />
 
@@ -36,12 +43,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
     
+    <!-- Preload critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Preload critical images -->
+    <!-- Preload critical hero image -->
     <link rel="preload" href="/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png" as="image" fetchpriority="high">
+    
+    <!-- Defer non-critical font loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
     
     <!-- Preconnect to important domains -->
     <link rel="preconnect" href="https://www.googletagmanager.com">
@@ -53,7 +66,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
     
-    <div id="root"></div>
+    <div id="root">
+      <div class="critical-spinner">
+        <div class="pulse-loading"></div>
+      </div>
+    </div>
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>

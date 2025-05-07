@@ -4,13 +4,28 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { HelmetProvider } from "react-helmet-async";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+// Use chunk naming for better code splitting
+const Index = lazy(() => import(/* webpackChunkName: "index-page" */ "./pages/Index"));
+const NotFound = lazy(() => import(/* webpackChunkName: "not-found-page" */ "./pages/NotFound"));
+
+// Create a lightweight loading component
+const PageLoading = () => (
+  <div className="min-h-screen bg-africa-beige"></div>
+);
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      retry: 1,
+    },
+  },
+});
 
 // Google Analytics page view tracking component
 const PageTracker = () => {
@@ -38,13 +53,29 @@ const App = () => (
             <PageTracker />
             <Routes>
               {/* Language-specific routes */}
-              <Route path="/en" element={<Index />} />
-              <Route path="/sw" element={<Index />} />
-              <Route path="/fr" element={<Index />} />
+              <Route path="/en" element={
+                <Suspense fallback={<PageLoading />}>
+                  <Index />
+                </Suspense>
+              } />
+              <Route path="/sw" element={
+                <Suspense fallback={<PageLoading />}>
+                  <Index />
+                </Suspense>
+              } />
+              <Route path="/fr" element={
+                <Suspense fallback={<PageLoading />}>
+                  <Index />
+                </Suspense>
+              } />
               {/* Redirect root to default language (English) */}
               <Route path="/" element={<Navigate to="/en" replace />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={
+                <Suspense fallback={<PageLoading />}>
+                  <NotFound />
+                </Suspense>
+              } />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>

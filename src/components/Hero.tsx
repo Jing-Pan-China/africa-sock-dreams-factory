@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ImageWithFallback from "@/components/ImageWithFallback";
 import { useEffect, useState } from "react";
 
 const Hero = () => {
@@ -11,6 +12,31 @@ const Hero = () => {
     const img = new Image();
     img.src = "/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png";
     img.onload = () => setImageLoaded(true);
+    
+    // Add intersection observer to load stats only when visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const statsSection = document.getElementById('hero-stats');
+          if (statsSection) {
+            statsSection.classList.remove('opacity-0');
+            statsSection.classList.add('opacity-100');
+            observer.disconnect();
+          }
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    const statsSection = document.getElementById('hero-stats');
+    if (statsSection) {
+      observer.observe(statsSection);
+    }
+    
+    return () => {
+      observer.disconnect();
+    };
   }, []);
   
   return (
@@ -34,22 +60,20 @@ const Hero = () => {
             </div>
           </div>
           <div className="lg:w-1/2 flex justify-center lg:justify-end">
-            <div className={`transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`} style={{minHeight: "300px"}}>
-              <img 
-                src="/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png" 
-                alt="Colorful rainbow socks on display, showcasing various patterns and designs for sock manufacturing" 
-                className="rounded-lg shadow-lg max-w-full lg:max-w-md h-auto"
-                width="600"
-                height="400"
-                loading="eager"
-                fetchPriority="high"
-              />
-            </div>
+            <ImageWithFallback 
+              src="/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png" 
+              alt="Colorful rainbow socks on display, showcasing various patterns and designs for sock manufacturing" 
+              className="rounded-lg shadow-lg max-w-full lg:max-w-md h-auto"
+              width={600}
+              height={400}
+              loading="eager"
+              fetchPriority="high"
+            />
           </div>
         </div>
       </div>
       
-      <div className="container mx-auto px-4 mt-16">
+      <div id="hero-stats" className="container mx-auto px-4 mt-16 opacity-0 transition-opacity duration-500">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="p-4 bg-white rounded-lg shadow">
             <p className="text-2xl md:text-3xl font-bold text-africa-orange">20+</p>

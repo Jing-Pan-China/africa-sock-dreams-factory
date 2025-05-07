@@ -28,8 +28,18 @@ const ImageWithFallback = ({
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    setImgSrc(src);
-    setIsLoaded(false);
+    // Use browser cache if available
+    if (src) {
+      const img = new Image();
+      img.src = src;
+      if (img.complete) {
+        setImgSrc(src);
+        setIsLoaded(true);
+      } else {
+        setImgSrc(src);
+        setIsLoaded(false);
+      }
+    }
   }, [src]);
 
   return (
@@ -42,7 +52,7 @@ const ImageWithFallback = ({
         height={height}
         loading={loading}
         decoding={decoding}
-        fetchPriority={fetchPriority}
+        fetchpriority={fetchPriority}
         onLoad={() => setIsLoaded(true)}
         onError={() => {
           setImgSrc(fallbackSrc);
