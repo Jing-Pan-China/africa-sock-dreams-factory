@@ -15,7 +15,7 @@ declare global {
 }
 
 createRoot(document.getElementById("root")!).render(
-  <Suspense fallback={<div className="h-screen w-screen flex items-center justify-center bg-africa-beige"></div>}>
+  <Suspense fallback={null}>
     <App />
   </Suspense>
 );

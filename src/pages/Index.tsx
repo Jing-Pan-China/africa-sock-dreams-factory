@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Skeleton } from "@/components/ui/skeleton";
 
 // Lazy load non-critical components
 const Services = lazy(() => import("@/components/Services"));
@@ -14,20 +13,6 @@ const AfricanBenefits = lazy(() => import("@/components/AfricanBenefits"));
 const About = lazy(() => import("@/components/About"));
 const Contact = lazy(() => import("@/components/Contact"));
 const Footer = lazy(() => import("@/components/Footer"));
-
-// Loading placeholder component
-const LoadingSection = () => (
-  <div className="w-full py-16">
-    <div className="container mx-auto px-4">
-      <Skeleton className="h-8 w-1/3 mx-auto mb-4" />
-      <Skeleton className="h-4 w-2/3 mx-auto mb-8" />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Skeleton className="h-40 rounded-lg" />
-        <Skeleton className="h-40 rounded-lg" />
-      </div>
-    </div>
-  </div>
-);
 
 const Index = () => {
   const { language, setLanguage } = useLanguage();
@@ -63,25 +48,25 @@ const Index = () => {
         {/* Hero is loaded eagerly as it's above the fold */}
         <Hero />
         
-        {/* Lazy load components below the fold */}
-        <Suspense fallback={<LoadingSection />}>
+        {/* Lazy load components below the fold with null fallback */}
+        <Suspense fallback={null}>
           <Services />
         </Suspense>
         
-        <Suspense fallback={<LoadingSection />}>
+        <Suspense fallback={null}>
           <AfricanBenefits />
         </Suspense>
         
-        <Suspense fallback={<LoadingSection />}>
+        <Suspense fallback={null}>
           <About />
         </Suspense>
         
-        <Suspense fallback={<LoadingSection />}>
+        <Suspense fallback={null}>
           <Contact />
         </Suspense>
       </main>
       
-      <Suspense fallback={<LoadingSection />}>
+      <Suspense fallback={null}>
         <Footer />
       </Suspense>
     </div>

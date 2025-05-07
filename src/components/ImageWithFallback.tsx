@@ -25,25 +25,23 @@ const ImageWithFallback = ({
   fetchPriority
 }: ImageWithFallbackProps) => {
   const [imgSrc, setImgSrc] = useState<string>(src);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(true);
 
   useEffect(() => {
     setImgSrc(src);
-    setIsLoaded(false);
   }, [src]);
 
   return (
-    <div className={`relative ${!isLoaded ? "bg-gray-200 animate-pulse" : ""}`}>
+    <div className={className}>
       <img
         src={imgSrc}
         alt={alt}
-        className={`${className} ${isLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
+        className="w-full h-full"
         width={width}
         height={height}
         loading={loading}
         decoding={decoding}
         fetchPriority={fetchPriority}
-        onLoad={() => setIsLoaded(true)}
         onError={() => {
           setImgSrc(fallbackSrc);
         }}
