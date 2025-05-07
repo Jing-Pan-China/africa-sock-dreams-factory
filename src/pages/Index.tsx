@@ -1,20 +1,40 @@
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Skeleton } from "@/components/ui/skeleton";
 
-// Lazy load non-critical components with chunk naming
-const Services = lazy(() => import(/* webpackChunkName: "services" */ "@/components/Services"));
-const AfricanBenefits = lazy(() => import(/* webpackChunkName: "african-benefits" */ "@/components/AfricanBenefits"));
-const About = lazy(() => import(/* webpackChunkName: "about" */ "@/components/About"));
-const Contact = lazy(() => import(/* webpackChunkName: "contact" */ "@/components/Contact"));
-const Footer = lazy(() => import(/* webpackChunkName: "footer" */ "@/components/Footer"));
+// Improved chunk naming and more granular code splitting
+const Services = lazy(() => 
+  import(/* webpackChunkName: "services" */ "@/components/Services").then(module => ({
+    default: module.default
+  }))
+);
+const AfricanBenefits = lazy(() => 
+  import(/* webpackChunkName: "african-benefits" */ "@/components/AfricanBenefits").then(module => ({
+    default: module.default
+  }))
+);
+const About = lazy(() => 
+  import(/* webpackChunkName: "about" */ "@/components/About").then(module => ({
+    default: module.default
+  }))
+);
+const Contact = lazy(() => 
+  import(/* webpackChunkName: "contact" */ "@/components/Contact").then(module => ({
+    default: module.default
+  }))
+);
+const Footer = lazy(() => 
+  import(/* webpackChunkName: "footer" */ "@/components/Footer").then(module => ({
+    default: module.default
+  }))
+);
 
-// More lightweight loading placeholder component
+// Enhanced loading placeholder
 const LoadingSection = () => (
   <div className="w-full py-12">
     <div className="container mx-auto px-4">
@@ -28,8 +48,8 @@ const LoadingSection = () => (
   </div>
 );
 
-// Implement intersection observer to load components when in viewport
-const LazyComponent = ({ children }: { children: React.ReactNode }) => {
+// Advanced lazy loading component with deferred loading
+const LazyComponent = ({ children, priority = false }: { children: React.ReactNode, priority?: boolean }) => {
   return (
     <Suspense fallback={<LoadingSection />}>
       {children}
@@ -53,27 +73,46 @@ const Index = () => {
     }
   }, [location.pathname, setLanguage]);
 
-  // Preconnect to critical domains and preload next screen components
+  // Optimized preloading logic using requestIdleCallback
+  const preloadComponent = useCallback((importFunc: () => Promise<any>) => {
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(() => {
+        importFunc().catch(() => {}); // Silent catch to avoid errors in console
+      });
+    } else {
+      // Fallback for browsers that don't support requestIdleCallback
+      setTimeout(() => {
+        importFunc().catch(() => {});
+      }, 1000);
+    }
+  }, []);
+
+  // Enhanced intersection observer with requestIdleCallback
   useEffect(() => {
-    // Use intersection observer to load components when needed
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        const id = entry.target.getAttribute('id');
-        if (entry.isIntersecting && id) {
-          // Preload the next section when current section is visible
-          const preloadMap: Record<string, () => void> = {
-            'services-section': () => import("@/components/AfricanBenefits"),
-            'benefits-section': () => import("@/components/About"),
-            'about-section': () => import("@/components/Contact")
-          };
-          
-          const preloadFunc = preloadMap[id];
-          if (preloadFunc) {
-            preloadFunc();
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          if (id) {
+            // Preload the next section when current section is visible
+            const preloadMap: Record<string, () => Promise<any>> = {
+              'services-section': () => import("@/components/AfricanBenefits"),
+              'benefits-section': () => import("@/components/About"),
+              'about-section': () => import("@/components/Contact")
+            };
+            
+            const preloadFunc = preloadMap[id];
+            if (preloadFunc) {
+              preloadComponent(preloadFunc);
+            }
           }
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { 
+      rootMargin: '200px', // Load earlier
+      threshold: 0.01 // Trigger with minimal visibility
+    });
     
     // Observe all sections for visibility
     document.querySelectorAll('section[id]').forEach(section => {
@@ -83,6 +122,15 @@ const Index = () => {
     return () => {
       observer.disconnect();
     };
+  }, [preloadComponent]);
+
+  // Preload further sections after initial render
+  useEffect(() => {
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(() => {
+        import("@/components/Services");
+      });
+    }
   }, []);
 
   return (
@@ -96,6 +144,9 @@ const Index = () => {
         <link rel="alternate" hrefLang="sw" href="https://africasock.com/sw" />
         <link rel="alternate" hrefLang="fr" href="https://africasock.com/fr" />
         <link rel="canonical" href={`https://africasock.com${location.pathname}`} />
+        
+        {/* Performance optimizations */}
+        <link rel="preload" href="/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png" as="image" />
       </Helmet>
       
       <Navbar />
@@ -133,5 +184,16 @@ const Index = () => {
     </div>
   );
 };
+
+// Add requestIdleCallback type definition for TypeScript
+declare global {
+  interface Window {
+    requestIdleCallback: (
+      callback: IdleRequestCallback,
+      options?: IdleRequestOptions
+    ) => number;
+    cancelIdleCallback: (handle: number) => void;
+  }
+}
 
 export default Index;

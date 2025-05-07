@@ -14,12 +14,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sock Machines & Sock Yarn from China – Factory Solutions for Africa</title>
 
-    <!-- Critical CSS inline for faster rendering -->
+    <!-- Enhanced Critical CSS with animation optimizations -->
     <style>
       .critical-spinner{display:flex;justify-content:center;align-items:center;height:100vh;background-color:#F5F5DC}
-      body{margin:0;font-family:system-ui,-apple-system,sans-serif}
+      body{margin:0;font-family:system-ui,-apple-system,sans-serif;text-rendering:optimizeSpeed}
+      html{scroll-behavior:smooth}
+      @keyframes fadeIn{from{opacity:0}to{opacity:1}}
       @keyframes pulse{0%,100%{opacity:.6}50%{opacity:.3}}
       .pulse-loading{animation:pulse 1.5s ease-in-out infinite}
+      .fade-in{animation:fadeIn .5s ease-out}
+      .container{width:100%;max-width:1200px;margin:0 auto;padding:0 1rem}
+      .bg-africa-beige{background-color:#F5F5DC}
+      .flex{display:flex}
+      .items-center{align-items:center}
+      .justify-center{justify-content:center}
+      .h-screen{height:100vh}
+      .w-screen{width:100vw}
+      
+      /* Content-visibility for better rendering performance */
+      .cv-auto{content-visibility:auto;contain-intrinsic-size:0 500px}
+      
+      /* Disable animations if user prefers reduced motion */
+      @media (prefers-reduced-motion:reduce){
+        *{animation-duration:0.01ms !important;transition-duration:0.01ms !important;scroll-behavior:auto !important}
+      }
     </style>
 
     <meta name="description" content="China-based sock factory solutions for Africa: sock knitting machines, quality yarn, export support, and custom sock production. Multilingual service available." />
@@ -43,21 +61,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
     
-    <!-- Preload critical resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Enhanced resource hints for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     
-    <!-- Preload critical hero image -->
+    <!-- Preload critical hero image with fetchpriority -->
     <link rel="preload" href="/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png" as="image" fetchpriority="high">
     
-    <!-- Defer non-critical font loading -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- Optimized font loading strategy -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     </noscript>
     
-    <!-- Preconnect to important domains -->
-    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <!-- Add DNS prefetch for critical domains -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    
+    <!-- Provide a loading indicator for browsers that don't support JavaScript -->
+    <noscript>
+      <style>
+        .critical-spinner{display:none}
+        .noscript-message{display:block;text-align:center;padding:2rem;font-family:system-ui,-apple-system,sans-serif}
+      </style>
+    </noscript>
   </head>
 
   <body>
@@ -70,9 +99,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="critical-spinner">
         <div class="pulse-loading"></div>
       </div>
+      <noscript>
+        <div class="noscript-message">
+          <h1>AfriSocks Global</h1>
+          <p>Please enable JavaScript to view this website.</p>
+        </div>
+      </noscript>
     </div>
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Add module preload for main entry point -->
+    <link rel="modulepreload" href="/src/main.tsx">
+    <script type="module" src="/src/main.tsx" async></script>
+    
+    <!-- Inline tiny script for immediately starting image preload -->
+    <script>
+      (function() {
+        var img = new Image();
+        img.src = "/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png";
+      })();
+    </script>
   </body>
 </html>
