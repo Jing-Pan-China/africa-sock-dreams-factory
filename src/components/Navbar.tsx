@@ -1,18 +1,24 @@
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { scrollToSection } from "@/utils/scrollUtils";
 
-const Navbar = () => {
+const Navbar = memo(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = useCallback(() => setIsMenuOpen(!isMenuOpen), [isMenuOpen]);
+  
+  const handleNavClick = useCallback((sectionId: string) => {
+    scrollToSection(sectionId);
+    setIsMenuOpen(false);
+  }, []);
 
   const menuItems = [
-    { href: "#services", label: "Services" },
-    { href: "#benefits", label: "Benefits" },
-    { href: "#about", label: "About" },
+    { id: "services", label: "Services" },
+    { id: "benefits", label: "Benefits" },
+    { id: "about", label: "About us" },
   ];
 
   return (
@@ -20,7 +26,20 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <a href="/" className="flex items-center">
+          <a 
+            href="/" 
+            className="flex items-center"
+            onClick={(e) => {
+              const isHomePage = window.location.pathname.endsWith('/en') || 
+                              window.location.pathname.endsWith('/sw') || 
+                              window.location.pathname.endsWith('/fr') || 
+                              window.location.pathname === '/';
+              if (isHomePage) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
             <span className="text-2xl font-bold text-africa-orange">AfriSocks</span>
             <span className="text-sm ml-1 text-africa-brown">Global</span>
           </a>
@@ -28,17 +47,20 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             {menuItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
                 className="text-gray-700 hover:text-africa-orange font-medium transition-colors"
               >
                 {item.label}
-              </a>
+              </button>
             ))}
             <LanguageSwitcher />
-            <Button asChild className="bg-africa-orange hover:bg-africa-terracotta text-white">
-              <a href="#contact">Contact Us</a>
+            <Button 
+              className="bg-africa-orange hover:bg-africa-terracotta text-white"
+              onClick={() => handleNavClick("contact")}
+            >
+              Contact Us
             </Button>
           </nav>
 
@@ -62,17 +84,19 @@ const Navbar = () => {
           <div className="container mx-auto px-4">
             <nav className="flex flex-col space-y-4">
               {menuItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="text-gray-700 hover:text-africa-orange font-medium py-2 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className="text-gray-700 hover:text-africa-orange font-medium py-2 transition-colors text-left"
                 >
                   {item.label}
-                </a>
+                </button>
               ))}
-              <Button asChild className="bg-africa-orange hover:bg-africa-terracotta text-white w-full">
-                <a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact Us</a>
+              <Button 
+                className="bg-africa-orange hover:bg-africa-terracotta text-white w-full"
+                onClick={() => handleNavClick("contact")}
+              >
+                Contact Us
               </Button>
             </nav>
           </div>
@@ -80,6 +104,8 @@ const Navbar = () => {
       )}
     </header>
   );
-};
+});
+
+Navbar.displayName = "Navbar";
 
 export default Navbar;
