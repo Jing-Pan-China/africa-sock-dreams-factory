@@ -37,8 +37,8 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
       staleTime: 5 * 60 * 1000, // 5 minutes
       retry: 1,
-      // Use optimized fetch policy
-      cacheTime: 10 * 60 * 1000, // 10 minutes
+      // Updated from cacheTime to gcTime (garbage collection time)
+      gcTime: 10 * 60 * 1000, // 10 minutes
     },
   },
 });

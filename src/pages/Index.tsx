@@ -1,7 +1,7 @@
 
+import React, { lazy, Suspense, useEffect, useCallback, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import { lazy, Suspense, useEffect, useCallback, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
