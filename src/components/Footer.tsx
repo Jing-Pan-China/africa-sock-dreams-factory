@@ -1,16 +1,7 @@
 
 import { Facebook, Instagram, Linkedin, Twitter, MessageCircle } from "lucide-react";
-import { scrollToSection } from "@/utils/scrollUtils";
-import { memo } from "react";
-
-const Footer = memo(() => {
-  const handleNavClick = (sectionId: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    scrollToSection(sectionId);
-  };
-  
-  return (
-    <footer className="bg-gray-900 text-white pt-16 pb-8">
+const Footer = () => {
+  return <footer className="bg-gray-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
@@ -36,22 +27,22 @@ const Footer = memo(() => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Services</h4>
             <ul className="space-y-3">
-              <li><a href="#services" onClick={(e) => handleNavClick("services", e)} className="text-gray-400 hover:text-africa-orange">Sock Machines</a></li>
-              <li><a href="#services" onClick={(e) => handleNavClick("services", e)} className="text-gray-400 hover:text-africa-orange">Quality Yarns</a></li>
-              <li><a href="#services" onClick={(e) => handleNavClick("services", e)} className="text-gray-400 hover:text-africa-orange">Export Services</a></li>
-              <li><a href="#services" onClick={(e) => handleNavClick("services", e)} className="text-gray-400 hover:text-africa-orange">Finished Socks</a></li>
-              <li><a href="#services" onClick={(e) => handleNavClick("services", e)} className="text-gray-400 hover:text-africa-orange">Training & Support</a></li>
+              <li><a href="#services" className="text-gray-400 hover:text-africa-orange">Sock Machines</a></li>
+              <li><a href="#services" className="text-gray-400 hover:text-africa-orange">Quality Yarns</a></li>
+              <li><a href="#services" className="text-gray-400 hover:text-africa-orange">Export Services</a></li>
+              <li><a href="#services" className="text-gray-400 hover:text-africa-orange">Finished Socks</a></li>
+              <li><a href="#services" className="text-gray-400 hover:text-africa-orange">Training & Support</a></li>
             </ul>
           </div>
           
           <div>
             <h4 className="text-lg font-semibold mb-6">Useful Links</h4>
             <ul className="space-y-3">
-              <li><a href="#about" onClick={(e) => handleNavClick("about", e)} className="text-gray-400 hover:text-africa-orange">About Us</a></li>
-              <li><a href="#testimonials" onClick={(e) => handleNavClick("testimonials", e)} className="text-gray-400 hover:text-africa-orange">Testimonials</a></li>
+              <li><a href="#about" className="text-gray-400 hover:text-africa-orange">About Us</a></li>
+              <li><a href="#testimonials" className="text-gray-400 hover:text-africa-orange">Testimonials</a></li>
               <li><a href="#" className="text-gray-400 hover:text-africa-orange">Case Studies</a></li>
               <li><a href="#" className="text-gray-400 hover:text-africa-orange">FAQ</a></li>
-              <li><a href="#contact" onClick={(e) => handleNavClick("contact", e)} className="text-gray-400 hover:text-africa-orange">Contact Us</a></li>
+              <li><a href="#contact" className="text-gray-400 hover:text-africa-orange">Contact Us</a></li>
             </ul>
           </div>
           
@@ -83,10 +74,6 @@ const Footer = memo(() => {
           </div>
         </div>
       </div>
-    </footer>
-  );
-});
-
-Footer.displayName = "Footer";
-
+    </footer>;
+};
 export default Footer;

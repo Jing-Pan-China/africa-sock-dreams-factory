@@ -3,26 +3,13 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
-import { useEffect, useState, lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { LanguageProvider } from "@/contexts/LanguageContext";
-import { HelmetProvider } from "react-helmet-async";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
 
-// Lazy load pages
-const Index = lazy(() => import("./pages/Index"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-
-// Create Query Client with optimized settings
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60000, // 1 minute
-      gcTime: 300000, // 5 minutes (renamed from cacheTime)
-      retry: 1,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 // Google Analytics page view tracking component
 const PageTracker = () => {
@@ -39,64 +26,23 @@ const PageTracker = () => {
   return null;
 };
 
-const App = () => {
-  // Handle offline status
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-  
-  useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
-    
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-    
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        <HelmetProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <PageTracker />
-              <Routes>
-                {/* Language-specific routes */}
-                <Route path="/en" element={
-                  <Suspense fallback={null}>
-                    <Index />
-                  </Suspense>
-                } />
-                <Route path="/sw" element={
-                  <Suspense fallback={null}>
-                    <Index />
-                  </Suspense>
-                } />
-                <Route path="/fr" element={
-                  <Suspense fallback={null}>
-                    <Index />
-                  </Suspense>
-                } />
-                {/* Redirect root to default language (English) */}
-                <Route path="/" element={<Navigate to="/en" replace />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={
-                  <Suspense fallback={null}>
-                    <NotFound />
-                  </Suspense>
-                } />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </HelmetProvider>
-      </LanguageProvider>
-    </QueryClientProvider>
-  );
-};
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <LanguageProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <PageTracker />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </LanguageProvider>
+  </QueryClientProvider>
+);
 
 export default App;

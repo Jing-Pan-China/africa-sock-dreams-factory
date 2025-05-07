@@ -3,33 +3,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://africasock.com/en</loc>
-    <lastmod>2025-05-07</lastmod>
+    <loc>https://africasock.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://africasock.com/en"/>
-    <xhtml:link rel="alternate" hreflang="sw" href="https://africasock.com/sw"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://africasock.com/fr"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://africasock.com/en"/>
-  </url>
-  <url>
-    <loc>https://africasock.com/sw</loc>
-    <lastmod>2025-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://africasock.com/en"/>
-    <xhtml:link rel="alternate" hreflang="sw" href="https://africasock.com/sw"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://africasock.com/fr"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://africasock.com/en"/>
-  </url>
-  <url>
-    <loc>https://africasock.com/fr</loc>
-    <lastmod>2025-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://africasock.com/en"/>
-    <xhtml:link rel="alternate" hreflang="sw" href="https://africasock.com/sw"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://africasock.com/fr"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://africasock.com/en"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://africasock.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="sw" href="https://africasock.com/?lang=sw"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://africasock.com/?lang=fr"/>
   </url>
 </urlset>
