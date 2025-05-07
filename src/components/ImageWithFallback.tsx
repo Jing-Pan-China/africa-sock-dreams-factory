@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 
 interface ImageWithFallbackProps {
   src: string;
@@ -13,7 +13,7 @@ interface ImageWithFallbackProps {
   fetchPriority?: "high" | "low" | "auto";
 }
 
-const ImageWithFallback = ({
+const ImageWithFallback = memo(({
   src,
   alt,
   fallbackSrc = "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&auto=format&fit=crop&q=80",
@@ -48,6 +48,8 @@ const ImageWithFallback = ({
       />
     </div>
   );
-};
+});
+
+ImageWithFallback.displayName = "ImageWithFallback";
 
 export default ImageWithFallback;
