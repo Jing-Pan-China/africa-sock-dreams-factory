@@ -1,10 +1,17 @@
 
 import { Button } from "@/components/ui/button";
-import { Linkedin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
   const { t } = useLanguage();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png";
+    img.onload = () => setImageLoaded(true);
+  }, []);
   
   return (
     <div className="relative bg-gradient-to-b from-africa-beige to-white py-16 md:py-24">
@@ -27,12 +34,17 @@ const Hero = () => {
             </div>
           </div>
           <div className="lg:w-1/2 flex justify-center lg:justify-end">
-            <img 
-              src="/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png" 
-              alt="Colorful rainbow socks on display, showcasing various patterns and designs for sock manufacturing" 
-              className="rounded-lg shadow-lg max-w-full lg:max-w-md h-auto"
-              loading="eager"
-            />
+            <div className={`transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`} style={{minHeight: "300px"}}>
+              <img 
+                src="/lovable-uploads/65c57b06-d152-4be6-927d-73c221b55cd6.png" 
+                alt="Colorful rainbow socks on display, showcasing various patterns and designs for sock manufacturing" 
+                className="rounded-lg shadow-lg max-w-full lg:max-w-md h-auto"
+                width="600"
+                height="400"
+                loading="eager"
+                fetchPriority="high"
+              />
+            </div>
           </div>
         </div>
       </div>

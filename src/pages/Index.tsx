@@ -1,15 +1,33 @@
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Services from "@/components/Services";
-import AfricanBenefits from "@/components/AfricanBenefits";
-import About from "@/components/About";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import { lazy, Suspense } from "react";
 import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { Skeleton } from "@/components/ui/skeleton";
+
+// Lazy load non-critical components
+const Services = lazy(() => import("@/components/Services"));
+const AfricanBenefits = lazy(() => import("@/components/AfricanBenefits"));
+const About = lazy(() => import("@/components/About"));
+const Contact = lazy(() => import("@/components/Contact"));
+const Footer = lazy(() => import("@/components/Footer"));
+
+// Loading placeholder component
+const LoadingSection = () => (
+  <div className="w-full py-16">
+    <div className="container mx-auto px-4">
+      <Skeleton className="h-8 w-1/3 mx-auto mb-4" />
+      <Skeleton className="h-4 w-2/3 mx-auto mb-8" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Skeleton className="h-40 rounded-lg" />
+        <Skeleton className="h-40 rounded-lg" />
+      </div>
+    </div>
+  </div>
+);
 
 const Index = () => {
   const { language, setLanguage } = useLanguage();
@@ -42,13 +60,30 @@ const Index = () => {
       
       <Navbar />
       <main>
+        {/* Hero is loaded eagerly as it's above the fold */}
         <Hero />
-        <Services />
-        <AfricanBenefits />
-        <About />
-        <Contact />
+        
+        {/* Lazy load components below the fold */}
+        <Suspense fallback={<LoadingSection />}>
+          <Services />
+        </Suspense>
+        
+        <Suspense fallback={<LoadingSection />}>
+          <AfricanBenefits />
+        </Suspense>
+        
+        <Suspense fallback={<LoadingSection />}>
+          <About />
+        </Suspense>
+        
+        <Suspense fallback={<LoadingSection />}>
+          <Contact />
+        </Suspense>
       </main>
-      <Footer />
+      
+      <Suspense fallback={<LoadingSection />}>
+        <Footer />
+      </Suspense>
     </div>
   );
 };

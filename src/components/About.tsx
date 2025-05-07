@@ -15,7 +15,10 @@ const About = () => {
               src="/lovable-uploads/d230f0c1-c100-4501-8504-b1981ecdc3fd.png" 
               alt="Jing Pan's LinkedIn QR Code - Scan to connect with Jing Pan on LinkedIn" 
               className="rounded-lg shadow-lg mx-auto max-w-[300px]" 
+              width="300"
+              height="300"
               loading="lazy"
+              decoding="async"
             />
             <div className="mt-4 text-center">
               <p className="text-lg font-semibold text-africa-brown flex items-center justify-center">
