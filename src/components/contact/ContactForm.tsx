@@ -72,8 +72,8 @@ const ContactForm = () => {
               name="name" 
               onChange={handleChange} 
               required 
-              placeholder=""
               value={formData.name}
+              placeholder=""
             />
           </div>
           <div>
@@ -86,8 +86,8 @@ const ContactForm = () => {
               type="email" 
               onChange={handleChange} 
               required 
-              placeholder=""
               value={formData.email}
+              placeholder=""
             />
           </div>
         </div>
@@ -101,8 +101,8 @@ const ContactForm = () => {
               id="phone" 
               name="phone" 
               onChange={handleChange} 
-              placeholder=""
               value={formData.phone}
+              placeholder=""
             />
           </div>
           <div>
@@ -114,8 +114,8 @@ const ContactForm = () => {
               name="country" 
               onChange={handleChange} 
               required 
-              placeholder=""
               value={formData.country}
+              placeholder=""
             />
           </div>
         </div>
@@ -147,8 +147,8 @@ const ContactForm = () => {
             id="message" 
             name="message" 
             onChange={handleChange} 
-            placeholder=""
             value={formData.message}
+            placeholder=""
             rows={5} 
           />
         </div>
