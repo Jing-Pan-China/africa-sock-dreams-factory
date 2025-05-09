@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { Mail, Phone, MapPin } from "lucide-react";
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -19,6 +20,7 @@ const Contact = () => {
   const {
     toast
   } = useToast();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {
       name,
@@ -29,12 +31,14 @@ const Contact = () => {
       [name]: value
     }));
   };
+
   const handleSelectChange = (name: string, value: string) => {
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -58,6 +62,7 @@ const Contact = () => {
       });
     }, 1500);
   };
+
   return <section id="contact" className="py-16 bg-africa-brown text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
@@ -127,13 +132,26 @@ const Contact = () => {
                     <label htmlFor="name" className="block mb-2 font-medium text-gray-700">
                       Your Name
                     </label>
-                    <Input id="name" name="name" onChange={handleChange} required placeholder="John Doe" />
+                    <Input 
+                      id="name" 
+                      name="name" 
+                      value={formData.name}
+                      onChange={handleChange} 
+                      required 
+                    />
                   </div>
                   <div>
                     <label htmlFor="email" className="block mb-2 font-medium text-gray-700">
                       Email Address
                     </label>
-                    <Input id="email" name="email" type="email" onChange={handleChange} required placeholder="john@example.com" />
+                    <Input 
+                      id="email" 
+                      name="email" 
+                      type="email" 
+                      value={formData.email}
+                      onChange={handleChange} 
+                      required 
+                    />
                   </div>
                 </div>
                 
@@ -142,13 +160,24 @@ const Contact = () => {
                     <label htmlFor="phone" className="block mb-2 font-medium text-gray-700">
                       Phone Number
                     </label>
-                    <Input id="phone" name="phone" onChange={handleChange} placeholder="+1-234-567-8900" />
+                    <Input 
+                      id="phone" 
+                      name="phone"
+                      value={formData.phone} 
+                      onChange={handleChange} 
+                    />
                   </div>
                   <div>
                     <label htmlFor="country" className="block mb-2 font-medium text-gray-700">
                       Country
                     </label>
-                    <Input id="country" name="country" onChange={handleChange} required placeholder="Nigeria, Kenya, etc." />
+                    <Input 
+                      id="country" 
+                      name="country"
+                      value={formData.country} 
+                      onChange={handleChange} 
+                      required 
+                    />
                   </div>
                 </div>
                 
@@ -175,7 +204,13 @@ const Contact = () => {
                   <label htmlFor="message" className="block mb-2 font-medium text-gray-700">
                     Your Message
                   </label>
-                  <Textarea id="message" name="message" onChange={handleChange} placeholder="Please describe your requirements in detail..." rows={5} />
+                  <Textarea 
+                    id="message" 
+                    name="message"
+                    value={formData.message} 
+                    onChange={handleChange} 
+                    rows={5} 
+                  />
                 </div>
                 
                 <Button type="submit" className="w-full bg-africa-orange hover:bg-africa-terracotta text-white py-6 text-lg" disabled={loading}>
@@ -188,4 +223,5 @@ const Contact = () => {
       </div>
     </section>;
 };
+
 export default Contact;
