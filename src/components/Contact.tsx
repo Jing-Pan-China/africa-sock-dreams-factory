@@ -132,7 +132,7 @@ const Contact = () => {
                       name="name" 
                       onChange={handleChange} 
                       required 
-                      placeholder="John Doe" 
+                      placeholder="" 
                     />
                   </div>
                   <div>
@@ -145,7 +145,7 @@ const Contact = () => {
                       type="email" 
                       onChange={handleChange} 
                       required 
-                      placeholder="john@example.com" 
+                      placeholder="" 
                     />
                   </div>
                 </div>
@@ -159,7 +159,7 @@ const Contact = () => {
                       id="phone" 
                       name="phone" 
                       onChange={handleChange} 
-                      placeholder="+1-234-567-8900" 
+                      placeholder="" 
                     />
                   </div>
                   <div>
@@ -171,7 +171,7 @@ const Contact = () => {
                       name="country" 
                       onChange={handleChange} 
                       required 
-                      placeholder="Nigeria, Kenya, etc." 
+                      placeholder="" 
                     />
                   </div>
                 </div>
@@ -203,7 +203,7 @@ const Contact = () => {
                     id="message" 
                     name="message" 
                     onChange={handleChange} 
-                    placeholder="Please describe your requirements in detail..." 
+                    placeholder="" 
                     rows={5} 
                   />
                 </div>
