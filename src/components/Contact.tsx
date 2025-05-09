@@ -132,7 +132,8 @@ const Contact = () => {
                       name="name" 
                       onChange={handleChange} 
                       required 
-                      placeholder="" 
+                      placeholder=""
+                      value={formData.name}
                     />
                   </div>
                   <div>
@@ -145,7 +146,8 @@ const Contact = () => {
                       type="email" 
                       onChange={handleChange} 
                       required 
-                      placeholder="" 
+                      placeholder=""
+                      value={formData.email}
                     />
                   </div>
                 </div>
@@ -159,7 +161,8 @@ const Contact = () => {
                       id="phone" 
                       name="phone" 
                       onChange={handleChange} 
-                      placeholder="" 
+                      placeholder=""
+                      value={formData.phone}
                     />
                   </div>
                   <div>
@@ -171,7 +174,8 @@ const Contact = () => {
                       name="country" 
                       onChange={handleChange} 
                       required 
-                      placeholder="" 
+                      placeholder=""
+                      value={formData.country}
                     />
                   </div>
                 </div>
@@ -180,7 +184,7 @@ const Contact = () => {
                   <label htmlFor="interest" className="block mb-2 font-medium text-gray-700">
                     I'm Interested In
                   </label>
-                  <Select onValueChange={value => handleSelectChange("interest", value)}>
+                  <Select onValueChange={value => handleSelectChange("interest", value)} value={formData.interest}>
                     <SelectTrigger id="interest">
                       <SelectValue placeholder="Select your interest" />
                     </SelectTrigger>
@@ -203,7 +207,8 @@ const Contact = () => {
                     id="message" 
                     name="message" 
                     onChange={handleChange} 
-                    placeholder="" 
+                    placeholder=""
+                    value={formData.message}
                     rows={5} 
                   />
                 </div>
