@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -98,7 +97,7 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold mb-1">Our Offices</h4>
                     <p>Xiamen, China</p>
-                    <p>Zhuji, China </p>
+                    <p>Zhuji, China </p>
                     <p>Shenzhen/ Dongguan,China</p>
                   </div>
                 </div>
@@ -127,13 +126,13 @@ const Contact = () => {
                     <label htmlFor="name" className="block mb-2 font-medium text-gray-700">
                       Your Name
                     </label>
-                    <Input id="name" name="name" onChange={handleChange} required placeholder="John Doe" />
+                    <Input id="name" name="name" value={formData.name} onChange={handleChange} required placeholder="John Doe" />
                   </div>
                   <div>
                     <label htmlFor="email" className="block mb-2 font-medium text-gray-700">
                       Email Address
                     </label>
-                    <Input id="email" name="email" type="email" onChange={handleChange} required placeholder="john@example.com" />
+                    <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="john@example.com" />
                   </div>
                 </div>
                 
@@ -142,13 +141,13 @@ const Contact = () => {
                     <label htmlFor="phone" className="block mb-2 font-medium text-gray-700">
                       Phone Number
                     </label>
-                    <Input id="phone" name="phone" onChange={handleChange} placeholder="+1-234-567-8900" />
+                    <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="+1-234-567-8900" />
                   </div>
                   <div>
                     <label htmlFor="country" className="block mb-2 font-medium text-gray-700">
                       Country
                     </label>
-                    <Input id="country" name="country" onChange={handleChange} required placeholder="Nigeria, Kenya, etc." />
+                    <Input id="country" name="country" value={formData.country} onChange={handleChange} required placeholder="Nigeria, Kenya, etc." />
                   </div>
                 </div>
                 
@@ -156,7 +155,7 @@ const Contact = () => {
                   <label htmlFor="interest" className="block mb-2 font-medium text-gray-700">
                     I'm Interested In
                   </label>
-                  <Select onValueChange={value => handleSelectChange("interest", value)}>
+                  <Select value={formData.interest} onValueChange={value => handleSelectChange("interest", value)}>
                     <SelectTrigger id="interest">
                       <SelectValue placeholder="Select your interest" />
                     </SelectTrigger>
@@ -175,7 +174,7 @@ const Contact = () => {
                   <label htmlFor="message" className="block mb-2 font-medium text-gray-700">
                     Your Message
                   </label>
-                  <Textarea id="message" name="message" onChange={handleChange} placeholder="Please describe your requirements in detail..." rows={5} />
+                  <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Please describe your requirements in detail..." rows={5} />
                 </div>
                 
                 <Button type="submit" className="w-full bg-africa-orange hover:bg-africa-terracotta text-white py-6 text-lg" disabled={loading}>
