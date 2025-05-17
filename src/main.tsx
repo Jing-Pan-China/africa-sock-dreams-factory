@@ -1,8 +1,8 @@
 
+import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { lazy, Suspense } from 'react'
 import './index.css'
-import * as React from 'react'
 
 // Use React.lazy for code splitting
 const App = lazy(() => import('./App.tsx'))
@@ -28,7 +28,10 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
   });
 }
 
-createRoot(document.getElementById("root")!).render(
+const rootElement = document.getElementById("root");
+if (!rootElement) throw new Error('Root element not found');
+
+createRoot(rootElement).render(
   <React.StrictMode>
     <Suspense fallback={null}>
       <App />
