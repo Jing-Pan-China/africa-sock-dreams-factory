@@ -2,6 +2,7 @@
 import { createRoot } from 'react-dom/client'
 import { lazy, Suspense, StrictMode } from 'react'
 import './index.css'
+import * as React from 'react'
 
 // Use React.lazy for code splitting
 const App = lazy(() => import('./App.tsx'))
