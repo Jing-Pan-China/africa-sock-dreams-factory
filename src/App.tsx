@@ -80,47 +80,45 @@ const App = () => {
   }, []);
 
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <LanguageProvider>
-          <HelmetProvider>
-            <TooltipProvider>
-              <Toaster />
-              <Sonner />
-              <BrowserRouter>
-                <PageTracker />
-                <Routes>
-                  {/* Language-specific routes */}
-                  <Route path="/en" element={
-                    <Suspense fallback={null}>
-                      <Index />
-                    </Suspense>
-                  } />
-                  <Route path="/sw" element={
-                    <Suspense fallback={null}>
-                      <Index />
-                    </Suspense>
-                  } />
-                  <Route path="/fr" element={
-                    <Suspense fallback={null}>
-                      <Index />
-                    </Suspense>
-                  } />
-                  {/* Redirect root to default language (English) */}
-                  <Route path="/" element={<Navigate to="/en" replace />} />
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={
-                    <Suspense fallback={null}>
-                      <NotFound />
-                    </Suspense>
-                  } />
-                </Routes>
-              </BrowserRouter>
-            </TooltipProvider>
-          </HelmetProvider>
-        </LanguageProvider>
-      </QueryClientProvider>
-    </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <LanguageProvider>
+        <HelmetProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <PageTracker />
+              <Routes>
+                {/* Language-specific routes */}
+                <Route path="/en" element={
+                  <Suspense fallback={null}>
+                    <Index />
+                  </Suspense>
+                } />
+                <Route path="/sw" element={
+                  <Suspense fallback={null}>
+                    <Index />
+                  </Suspense>
+                } />
+                <Route path="/fr" element={
+                  <Suspense fallback={null}>
+                    <Index />
+                  </Suspense>
+                } />
+                {/* Redirect root to default language (English) */}
+                <Route path="/" element={<Navigate to="/en" replace />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={
+                  <Suspense fallback={null}>
+                    <NotFound />
+                  </Suspense>
+                } />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </HelmetProvider>
+      </LanguageProvider>
+    </QueryClientProvider>
   );
 };
 

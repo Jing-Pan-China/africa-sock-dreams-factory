@@ -29,7 +29,9 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
 }
 
 createRoot(document.getElementById("root")!).render(
-  <Suspense fallback={null}>
-    <App />
-  </Suspense>
+  <React.StrictMode>
+    <Suspense fallback={null}>
+      <App />
+    </Suspense>
+  </React.StrictMode>
 );
