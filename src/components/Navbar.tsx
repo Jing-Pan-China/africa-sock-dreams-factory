@@ -4,16 +4,26 @@ import { useState, useCallback, memo } from "react";
 import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { scrollToSection } from "@/utils/scrollUtils";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = memo(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  
   const toggleMenu = useCallback(() => setIsMenuOpen(!isMenuOpen), [isMenuOpen]);
   
   const handleNavClick = useCallback((sectionId: string) => {
+    // First scroll to section
     scrollToSection(sectionId);
+    
+    // Then update URL with the hash fragment
+    const pathname = location.pathname.split('#')[0]; // Remove any existing hash
+    navigate(`${pathname}#${sectionId}`, { replace: true });
+    
+    // Close mobile menu if open
     setIsMenuOpen(false);
-  }, []);
+  }, [navigate, location.pathname]);
 
   const menuItems = [
     { id: "services", label: "Services" },
@@ -38,6 +48,9 @@ const Navbar = memo(() => {
               if (isHomePage) {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Remove hash from URL when scrolling to top
+                const pathname = location.pathname.split('#')[0];
+                navigate(pathname, { replace: true });
               }
             }}
           >

@@ -5,6 +5,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { handleInitialUrlHash } from "@/utils/scrollUtils";
 
 // Lazy load non-critical components
 const Services = lazy(() => import("@/components/Services"));
@@ -42,6 +43,13 @@ const Index = () => {
       setIsInitialLoad(false);
     }
   }, [location.pathname, setLanguage, language, isInitialLoad]);
+
+  // Handle URL hash for scrolling to section on initial page load
+  useEffect(() => {
+    if (!isLoading) {
+      handleInitialUrlHash();
+    }
+  }, [isLoading]);
 
   return (
     <div className="min-h-screen">

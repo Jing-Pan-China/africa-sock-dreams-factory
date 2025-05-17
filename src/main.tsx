@@ -3,7 +3,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { lazy, Suspense } from 'react'
 import './index.css'
-import { TooltipProvider } from "@radix-ui/react-tooltip";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 // Use React.lazy for code splitting
 const App = lazy(() => import('./App.tsx'))

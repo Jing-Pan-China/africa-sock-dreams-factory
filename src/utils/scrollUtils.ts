@@ -31,3 +31,19 @@ export const isElementInViewport = (el: Element, partiallyVisible = false): bool
     ? rect.top < windowHeight && rect.bottom >= 0
     : rect.top >= 0 && rect.bottom <= windowHeight;
 };
+
+/**
+ * Handle scrolling to section based on URL hash on page load
+ * @param offset - Optional offset from the top (defaults to accounting for fixed header)
+ */
+export const handleInitialUrlHash = (offset = 80): void => {
+  // Get the hash from the URL (without the '#')
+  const hash = window.location.hash.substring(1);
+  
+  if (hash) {
+    // Wait a moment for the page to fully render
+    setTimeout(() => {
+      scrollToSection(hash, offset);
+    }, 100);
+  }
+};
