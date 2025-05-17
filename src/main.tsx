@@ -3,6 +3,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { lazy, Suspense } from 'react'
 import './index.css'
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 
 // Use React.lazy for code splitting
 const App = lazy(() => import('./App.tsx'))
@@ -33,8 +34,10 @@ if (!rootElement) throw new Error('Root element not found');
 
 createRoot(rootElement).render(
   <React.StrictMode>
-    <Suspense fallback={null}>
-      <App />
-    </Suspense>
+    <TooltipProvider>
+      <Suspense fallback={null}>
+        <App />
+      </Suspense>
+    </TooltipProvider>
   </React.StrictMode>
 );
