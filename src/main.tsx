@@ -1,6 +1,6 @@
 
 import { createRoot } from 'react-dom/client'
-import { lazy, Suspense, StrictMode } from 'react'
+import { lazy, Suspense } from 'react'
 import './index.css'
 import * as React from 'react'
 
@@ -29,9 +29,7 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
 }
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Suspense fallback={null}>
-      <App />
-    </Suspense>
-  </StrictMode>
+  <Suspense fallback={null}>
+    <App />
+  </Suspense>
 );
