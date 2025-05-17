@@ -4,8 +4,12 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 
 import { cn } from "@/lib/utils"
 
-// Use the direct primitive component instead of trying to wrap it with forwardRef
-const TooltipProvider = TooltipPrimitive.Provider
+// Create a proper functional component wrapper for TooltipProvider
+const TooltipProvider = ({ children, ...props }: React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>) => (
+  <TooltipPrimitive.Provider {...props}>
+    {children}
+  </TooltipPrimitive.Provider>
+)
 TooltipProvider.displayName = TooltipPrimitive.Provider.displayName
 
 const Tooltip = TooltipPrimitive.Root
