@@ -1,7 +1,6 @@
 
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState, lazy, Suspense } from "react";
@@ -83,39 +82,37 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
         <HelmetProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <PageTracker />
-              <Routes>
-                {/* Language-specific routes */}
-                <Route path="/en" element={
-                  <Suspense fallback={null}>
-                    <Index />
-                  </Suspense>
-                } />
-                <Route path="/sw" element={
-                  <Suspense fallback={null}>
-                    <Index />
-                  </Suspense>
-                } />
-                <Route path="/fr" element={
-                  <Suspense fallback={null}>
-                    <Index />
-                  </Suspense>
-                } />
-                {/* Redirect root to default language (English) */}
-                <Route path="/" element={<Navigate to="/en" replace />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={
-                  <Suspense fallback={null}>
-                    <NotFound />
-                  </Suspense>
-                } />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <PageTracker />
+            <Routes>
+              {/* Language-specific routes */}
+              <Route path="/en" element={
+                <Suspense fallback={null}>
+                  <Index />
+                </Suspense>
+              } />
+              <Route path="/sw" element={
+                <Suspense fallback={null}>
+                  <Index />
+                </Suspense>
+              } />
+              <Route path="/fr" element={
+                <Suspense fallback={null}>
+                  <Index />
+                </Suspense>
+              } />
+              {/* Redirect root to default language (English) */}
+              <Route path="/" element={<Navigate to="/en" replace />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={
+                <Suspense fallback={null}>
+                  <NotFound />
+                </Suspense>
+              } />
+            </Routes>
+          </BrowserRouter>
         </HelmetProvider>
       </LanguageProvider>
     </QueryClientProvider>
