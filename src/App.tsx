@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -11,6 +10,7 @@ import * as React from "react";
 // Lazy load pages
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const ThankYou = lazy(() => import("./pages/ThankYou"));
 
 // Create Query Client with optimized settings
 const queryClient = new QueryClient({
@@ -101,6 +101,22 @@ const App = () => {
               <Route path="/fr" element={
                 <Suspense fallback={null}>
                   <Index />
+                </Suspense>
+              } />
+              {/* Thank You page routes for each language */}
+              <Route path="/en/thank-you" element={
+                <Suspense fallback={null}>
+                  <ThankYou />
+                </Suspense>
+              } />
+              <Route path="/sw/thank-you" element={
+                <Suspense fallback={null}>
+                  <ThankYou />
+                </Suspense>
+              } />
+              <Route path="/fr/thank-you" element={
+                <Suspense fallback={null}>
+                  <ThankYou />
                 </Suspense>
               } />
               {/* Redirect root to default language (English) */}
