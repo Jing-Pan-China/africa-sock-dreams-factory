@@ -29,7 +29,7 @@ const Navbar = memo(() => {
     { id: "services", label: "Services" },
     { id: "benefits", label: "Benefits" },
     { id: "about", label: "About us" },
-    { id: "contact", label: "Contact" },
+    // Removed the Contact item from here
   ];
 
   return (
