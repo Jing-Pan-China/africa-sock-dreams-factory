@@ -32,7 +32,8 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error('Root element not found');
 
-createRoot(rootElement).render(
+// Wrapping the entire app in a TooltipProvider function component to ensure proper React context
+const Root = () => (
   <React.StrictMode>
     <TooltipProvider>
       <Suspense fallback={null}>
@@ -41,3 +42,5 @@ createRoot(rootElement).render(
     </TooltipProvider>
   </React.StrictMode>
 );
+
+createRoot(rootElement).render(<Root />);
